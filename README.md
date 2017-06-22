@@ -33,4 +33,3 @@ Repository Infos
     GitHub:         github.com/macmade
     LinkedIn:       ch.linkedin.com/in/macmade/
     StackOverflow:  stackoverflow.com/users/182676/macmade
-micKit
