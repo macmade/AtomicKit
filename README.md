@@ -40,9 +40,11 @@ Synchronization Primitives
 
 These types conforms to the `AtomicKit.Lockable` protocol, which extends `NSLocking`, meaning they all have the following methods:
 
-    public func lock()
-    public func unlock()
-    public func tryLock() -> Bool
+```swift
+public func lock()
+public func unlock()
+public func tryLock() -> Bool
+```
 
 ### AtomicKit.Mutex
 
@@ -66,10 +68,12 @@ Semaphores are initialized with a count, and may be named, in which case they ar
 
 The `Semaphore` class exposes the following methods:
 
-    public init( count: Int32 = 1, name: String? = nil )
-    public func wait()
-    public func signal()
-    public func tryWait() -> Bool
+```swift
+public init( count: Int32 = 1, name: String? = nil )
+public func wait()
+public func signal()
+public func tryWait() -> Bool
+```
 
 Internally, the `Semaphore` class uses `POSIX` semaphores for named semaphores, and `MACH` semaphores for unnamed semaphores.
 
@@ -78,15 +82,17 @@ Read-Write Locks
 
 **AtomicKit** supports read-write locking mechanism using the `RWLock` class:
 
-    public enum Intent
-    {
-        case reading
-        case writing
-    }
-    
-    public func lock( for intent: Intent )
-    public func unlock()
-    public func tryLock( for intent: Intent ) -> Bool
+```swift
+public enum Intent
+{
+    case reading
+    case writing
+}
+
+public func lock( for intent: Intent )
+public func unlock()
+public func tryLock( for intent: Intent ) -> Bool
+```
 
 Internally, the `RWLock` class uses `pthread_rwlock_t`.
 
@@ -98,32 +104,42 @@ If you're familiar with C++, you can think of it as `std::atomic`.
 
 The goal is to provide a thread-safe property type that you can use in your own classes:
 
-    class Foo
-    {
-        public var bar = Atomic< Bool >( value: false )
-    }
+```swift
+class Foo
+{
+    public var bar = Atomic< Bool >( value: false )
+}
+```
 
 The example above declares an atomic `Boolean` property.  
 
 Its value can be get with:
 
-    self.bar.get()
-    
+```swift
+self.bar.get()
+```
+
 And can be set with:
 
-    self.bar.set( true )
+```swift
+self.bar.set( true )
+```
 
 Internally, `Atomic` uses an `UnfairLock`.
 
 If more complex stuff is required with the value it holds, the `Atomic` generic type lets you execute a custom closure.
 
-    let foo = Atomic< String >( value: "hello" )
-    
-    foo.execute{ ( value: String ) in value.append( ", world" ) }
-    
+```swift
+let foo = Atomic< String >( value: "hello" )
+
+foo.execute{ ( value: String ) in value.append( ", world" ) }
+```
+
 You can also use a return value from the closure:
 
-    let isEmpty = foo.execute{ ( value: String ) -> Bool in value.isEmpty }
+```swift
+let isEmpty = foo.execute{ ( value: String ) -> Bool in value.isEmpty }
+```
 
 Atomicity is guaranteed in both cases.
 
@@ -135,7 +151,9 @@ Under the hood, the `Atomic` class inherits from `LockingValue`.
 As mentioned above, `Atomic` uses an `UnfairLock`.  
 Using `LockingValue`, you can specify another type of locking mechanism, as long as it conforms to the `NSLocking` protocol:
 
-    let foo = LockingValue< String?, NSRecursiveLock >( value: nil )
+```swift
+let foo = LockingValue< String?, NSRecursiveLock >( value: nil )
+```
 
 Dispatched Atomic Properties
 ----------------------------
@@ -147,17 +165,21 @@ But using **dispatch queues** also ensure synchronization between multiple concu
 
 A `DispatchedValue` is initialized with a default value, and with a dispatch queue:
 
-    let foo = DispatchedValue< String >( value: "", queue: DispatchQueue.main )
+```swift
+let foo = DispatchedValue< String >( value: "", queue: DispatchQueue.main )
+```
 
 Then, every call to the `get` or `set` methods will be executed on the provided queue, thus achieving effective synchronization.
 
 As the `Atomic` type, `DispatchedValue` also lets you execute custom closures, that will be executed on the provided queue:
 
-    let foo = DispatchedValue< String >( value: "hello", queue: DispatchQueue.main )
-    
-    foo.execute{ ( value: String ) in value.append( ", world" ) }
-    
-    let isEmpty = foo.execute{ ( value: String ) -> Bool in value.isEmpty }
+```swift
+let foo = DispatchedValue< String >( value: "hello", queue: DispatchQueue.main )
+
+foo.execute{ ( value: String ) in value.append( ", world" ) }
+
+let isEmpty = foo.execute{ ( value: String ) -> Bool in value.isEmpty }
+```
 
 ### Dispatched properties and KVO
 
