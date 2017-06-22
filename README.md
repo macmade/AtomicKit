@@ -121,7 +121,7 @@ If more complex stuff is required with the value it holds, the `Atomic` generic 
     
     foo.execute{ ( value: String ) in value.append( ", world" ) }
     
-You can also use a return value for the closure:
+You can also use a return value from the closure:
 
     let isEmpty = foo.execute{ ( value: String ) -> Bool in value.isEmpty }
 
