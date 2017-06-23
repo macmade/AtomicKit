@@ -23,8 +23,8 @@
  ******************************************************************************/
 
 /*!
- * @header      sem_t.h
+ * @file        AtomicKit.h
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-#import "sem_t.h"
+#import <AtomicKit/sem_t.h>

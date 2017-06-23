@@ -29,6 +29,8 @@
 		0551EAFB1EFC25C300D137B9 /* DispatchedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAEF1EFC24C500D137B9 /* DispatchedString.swift */; };
 		0551EAFC1EFC25C300D137B9 /* DispatchedTreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAF21EFC24C500D137B9 /* DispatchedTreeController.swift */; };
 		0551EAFD1EFC25C300D137B9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 055EF4771EFBE78100E610CF /* Info.plist */; };
+		0551EB141EFD397C00D137B9 /* AtomicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0551EB131EFD397C00D137B9 /* AtomicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0551EB151EFD39F300D137B9 /* sem_t.h in Headers */ = {isa = PBXBuildFile; fileRef = 055EF4961EFBE7EA00E610CF /* sem_t.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		055EF4711EFBE78100E610CF /* AtomicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 055EF4671EFBE78100E610CF /* AtomicKit.framework */; };
 		055EF4981EFBE7F800E610CF /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4971EFBE7EA00E610CF /* Atomic.swift */; };
 		055EF4991EFBE7F800E610CF /* Lockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF48E1EFBE7EA00E610CF /* Lockable.swift */; };
@@ -83,6 +85,7 @@
 		0551EAF31EFC24C500D137B9 /* DispatchedBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedBool.swift; sourceTree = "<group>"; };
 		0551EAFE1EFC25D900D137B9 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		0551EAFF1EFC25D900D137B9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0551EB131EFD397C00D137B9 /* AtomicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtomicKit.h; sourceTree = "<group>"; };
 		055EF4671EFBE78100E610CF /* AtomicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AtomicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		055EF46B1EFBE78100E610CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		055EF4701EFBE78100E610CF /* AtomicKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtomicKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +94,6 @@
 		055EF48E1EFBE7EA00E610CF /* Lockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lockable.swift; sourceTree = "<group>"; };
 		055EF48F1EFBE7EA00E610CF /* UnfairLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLock.swift; sourceTree = "<group>"; };
 		055EF4901EFBE7EA00E610CF /* RWLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RWLock.swift; sourceTree = "<group>"; };
-		055EF4911EFBE7EA00E610CF /* AtomicKit-Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AtomicKit-Bridging.h"; sourceTree = "<group>"; };
 		055EF4921EFBE7EA00E610CF /* LockingValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockingValue.swift; sourceTree = "<group>"; };
 		055EF4931EFBE7EA00E610CF /* RecursiveMutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveMutex.swift; sourceTree = "<group>"; };
 		055EF4941EFBE7EA00E610CF /* Semaphore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semaphore.swift; sourceTree = "<group>"; };
@@ -186,17 +188,17 @@
 			isa = PBXGroup;
 			children = (
 				055EF4971EFBE7EA00E610CF /* Atomic.swift */,
-				055EF4911EFBE7EA00E610CF /* AtomicKit-Bridging.h */,
-				0551EAC51EFC13D600D137B9 /* DispatchedBool.swift */,
-				0551EAC91EFC14AA00D137B9 /* DispatchedNumber.swift */,
-				0551EACB1EFC156D00D137B9 /* DispatchedObject.swift */,
-				0551EAC71EFC142800D137B9 /* DispatchedString.swift */,
-				0551EA671EFBFFB000D137B9 /* DispatchedValue.swift */,
+				0551EB131EFD397C00D137B9 /* AtomicKit.h */,
 				0551EAE11EFC1E6200D137B9 /* DispatchedArrayController.swift */,
-				0551EAE31EFC1EA600D137B9 /* DispatchedTreeController.swift */,
+				0551EAC51EFC13D600D137B9 /* DispatchedBool.swift */,
 				0551EAE51EFC1ECE00D137B9 /* DispatchedMutableArray.swift */,
 				0551EAE71EFC1EDF00D137B9 /* DispatchedMutableDictionary.swift */,
 				0551EAE91EFC1EED00D137B9 /* DispatchedMutableSet.swift */,
+				0551EAC91EFC14AA00D137B9 /* DispatchedNumber.swift */,
+				0551EACB1EFC156D00D137B9 /* DispatchedObject.swift */,
+				0551EAC71EFC142800D137B9 /* DispatchedString.swift */,
+				0551EAE31EFC1EA600D137B9 /* DispatchedTreeController.swift */,
+				0551EA671EFBFFB000D137B9 /* DispatchedValue.swift */,
 				055EF48E1EFBE7EA00E610CF /* Lockable.swift */,
 				055EF4921EFBE7EA00E610CF /* LockingValue.swift */,
 				055EF4951EFBE7EA00E610CF /* Mutex.swift */,
@@ -218,6 +220,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0551EB141EFD397C00D137B9 /* AtomicKit.h in Headers */,
+				0551EB151EFD39F300D137B9 /* sem_t.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,7 +653,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.AtomicKit";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/AtomicKit/Source/AtomicKit-Bridging.h";
 			};
 			name = Debug;
 		};
@@ -667,7 +670,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.AtomicKit";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/AtomicKit/Source/AtomicKit-Bridging.h";
 			};
 			name = Release;
 		};
