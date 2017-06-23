@@ -29,6 +29,7 @@
 
 import XCTest
 import AtomicKit
+import STDThreadKit
 
 class RWLockTest: XCTestCase
 {
@@ -40,5 +41,211 @@ class RWLockTest: XCTestCase
     override func tearDown()
     {
         super.tearDown()
+    }
+    
+    func testSingleReader()
+    {
+        let l = try? RWLock()
+        
+        XCTAssertNotNil( l )
+        XCTAssertTrue( l!.tryLock( for: .reading ) );
+        
+        l!.unlock( for: .reading );
+    }
+    
+    func testSingleWriter()
+    {
+        let l = try? RWLock()
+        
+        XCTAssertNotNil( l )
+        XCTAssertTrue( l!.tryLock( for: .writing ) );
+        
+        l!.unlock( for: .writing );
+    }
+    
+    func testMultipleReaders_SameThread()
+    {
+        let l = try? RWLock()
+        
+        XCTAssertNotNil( l )
+        XCTAssertTrue( l!.tryLock( for: .reading ) );
+        XCTAssertTrue( l!.tryLock( for: .reading ) );
+        
+        l!.unlock( for: .reading );
+        l!.unlock( for: .reading );
+    }
+    
+    func testMultipleWriters_SameThread()
+    {
+        let l = try? RWLock()
+        
+        XCTAssertNotNil( l )
+        XCTAssertTrue( l!.tryLock( for: .writing ) );
+        XCTAssertTrue( l!.tryLock( for: .writing ) );
+        
+        l!.unlock( for: .writing );
+        l!.unlock( for: .writing );
+    }
+    
+    func testReadWrite_SameThread()
+    {
+        let l = try? RWLock()
+        
+        XCTAssertNotNil( l )
+        XCTAssertTrue( l!.tryLock( for: .reading ) );
+        XCTAssertTrue( l!.tryLock( for: .writing ) );
+        
+        l!.unlock( for: .reading );
+        l!.unlock( for: .writing );
+    }
+    
+    func testWriteRead_SameThread()
+    {
+        let l = try? RWLock()
+        
+        XCTAssertNotNil( l )
+        XCTAssertTrue( l!.tryLock( for: .writing ) );
+        XCTAssertTrue( l!.tryLock( for: .reading ) );
+        
+        l!.unlock( for: .writing );
+        l!.unlock( for: .reading );
+    }
+    
+    func testMultipleReaders_DifferentThreads()
+    {
+        let l = try? RWLock()
+        var b = false
+        
+        XCTAssertNotNil( l )
+        
+        l!.lock( for: .reading )
+        
+        let _ = try? STDThread
+        {
+            b = l!.tryLock( for: .reading )
+            
+            if( b )
+            {
+                l!.unlock( for: .reading )
+            }
+        }
+        .join()
+        
+        XCTAssertTrue( b )
+        l!.unlock( for: .reading );
+    }
+    
+    func testMultipleWriters_DifferentThreads()
+    {
+        let l = try? RWLock()
+        var b = false
+        
+        XCTAssertNotNil( l )
+        
+        l!.lock( for: .writing )
+        
+        let _ = try? STDThread
+        {
+            b = l!.tryLock( for: .writing )
+            
+            if( b )
+            {
+                l!.unlock( for: .writing )
+            }
+        }
+        .join()
+        
+        XCTAssertFalse( b );
+        
+        l!.unlock( for: .writing );
+        
+        let _ = try? STDThread
+        {
+            b = l!.tryLock( for: .writing )
+            
+            if( b )
+            {
+                l!.unlock( for: .writing )
+            }
+        }
+        .join()
+        
+        XCTAssertTrue( b );
+    }
+    
+    func testReadWrite_DifferentThreads()
+    {
+        let l = try? RWLock()
+        var b = false
+        
+        XCTAssertNotNil( l )
+        
+        l!.lock( for: .reading )
+        
+        let _ = try? STDThread
+        {
+            b = l!.tryLock( for: .writing )
+            
+            if( b )
+            {
+                l!.unlock( for: .writing )
+            }
+        }
+        .join()
+        
+        XCTAssertFalse( b );
+        
+        l!.unlock( for: .reading );
+        
+        let _ = try? STDThread
+        {
+            b = l!.tryLock( for: .writing )
+            
+            if( b )
+            {
+                l!.unlock( for: .writing )
+            }
+        }
+        .join()
+        
+        XCTAssertTrue( b );
+    }
+      
+    func testWriteRead_DifferentThreads()
+    {
+        let l = try? RWLock()
+        var b = false
+        
+        XCTAssertNotNil( l )
+        
+        l!.lock( for: .writing );
+        
+        let _ = try? STDThread
+        {
+            b = l!.tryLock( for: .reading )
+            
+            if( b )
+            {
+                l!.unlock( for: .reading )
+            }
+        }
+        .join()
+        
+        XCTAssertFalse( b );
+        
+        l!.unlock( for: .writing );
+        
+        let _ = try? STDThread
+        {
+            b = l!.tryLock( for: .reading )
+            
+            if( b )
+            {
+                l!.unlock( for: .reading )
+            }
+        }
+        .join()
+        
+        XCTAssertTrue( b );
     }
 }
