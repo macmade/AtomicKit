@@ -33,8 +33,7 @@ public class RWLock
 {
     public enum Error: Swift.Error
     {
-        case CannotCreateLock
-        case CannotCreateLockAttributes
+        case CannotCreateMutex
     }
     
     public enum Intent
@@ -45,46 +44,88 @@ public class RWLock
     
     public init() throws
     {
-        var attr = pthread_rwlockattr_t()
+        self._r = 0;
         
-        if( pthread_rwlockattr_init( &attr ) != 0 )
+        do
         {
-            throw Error.CannotCreateLockAttributes
+            try self._rrmtx = RecursiveMutex()
+            try self._wrmtx = RecursiveMutex()
         }
-        
-        if( pthread_rwlock_init( &( self._lock ), &attr ) != 0 )
+        catch
         {
-            throw Error.CannotCreateLock
+            throw Error.CannotCreateMutex
         }
-    }
-    
-    deinit
-    {
-        pthread_rwlock_destroy( &( self._lock ) )
     }
     
     public func lock( for intent: Intent )
     {
-        switch( intent )
+        if( intent == .reading )
         {
-            case .reading: pthread_rwlock_rdlock( &( self._lock ) )
-            case .writing: pthread_rwlock_wrlock( &( self._lock ) )
+            self._rrmtx.lock()
+            
+            if( self._r == 0 )
+            {
+                self._wrmtx.lock()
+            }
+            
+            self._r += 1
+            
+            self._rrmtx.unlock()
+        }
+        else
+        {
+            self._wrmtx.lock()
         }
     }
     
-    public func unlock()
+    public func unlock( for intent: Intent )
     {
-        pthread_rwlock_unlock( &( self._lock ) )
+        if( intent == .reading )
+        {
+            self._rrmtx.lock()
+            
+            if( self._r > 0 )
+            {
+                self._r -= 1
+                
+                if( self._r == 0 )
+                {
+                    self._wrmtx.unlock();
+                }
+            }
+            
+            self._rrmtx.unlock()
+        }
+        else
+        {
+            self._wrmtx.unlock()
+        }
     }
     
     public func tryLock( for intent: Intent ) -> Bool
     {
-        switch( intent )
+        if( intent == .reading )
         {
-            case .reading: return pthread_rwlock_tryrdlock( &( self._lock ) ) == 0
-            case .writing: return pthread_rwlock_trywrlock( &( self._lock ) ) == 0
+            self._rrmtx.lock()
+            
+            let r = ( self._r == 0 ) ? self._wrmtx.tryLock() : true
+            
+            if( r )
+            {
+                self._r += 1
+            }
+            
+            self._rrmtx.unlock()
+            
+            return r
+        }
+        else
+        {
+            return self._wrmtx.tryLock()
         }
     }
     
-    private var _lock = pthread_rwlock_t()
+    private var _rrmtx: RecursiveMutex;
+    private var _wrmtx: RecursiveMutex;
+    private var _r:     Int64
 }
