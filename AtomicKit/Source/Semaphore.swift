@@ -48,7 +48,7 @@ public class Semaphore
             throw Error.InvalidSemaphoreCount
         }
         
-        if( name != nil && name?.count == 0 )
+        if( name != nil && name?.utf8.count == 0 )
         {
             throw Error.InvalidSemaphoreName
         }
@@ -63,7 +63,7 @@ public class Semaphore
         
         if( self.isNamed )
         {
-            var cp = name?.cString( using: .ascii ) 
+            var cp = name?.cString( using: .utf8 ) 
             
             if( cp == nil )
             {
