@@ -36,7 +36,6 @@
 		055EF49B1EFBE7F800E610CF /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4951EFBE7EA00E610CF /* Mutex.swift */; };
 		055EF49C1EFBE7F800E610CF /* RecursiveMutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4931EFBE7EA00E610CF /* RecursiveMutex.swift */; };
 		055EF49D1EFBE7F800E610CF /* RWLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4901EFBE7EA00E610CF /* RWLock.swift */; };
-		055EF49E1EFBE7F800E610CF /* sem_t.h in Headers */ = {isa = PBXBuildFile; fileRef = 055EF4961EFBE7EA00E610CF /* sem_t.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		055EF49F1EFBE7F800E610CF /* sem_t.m in Sources */ = {isa = PBXBuildFile; fileRef = 055EF48D1EFBE7EA00E610CF /* sem_t.m */; };
 		055EF4A01EFBE7F800E610CF /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4941EFBE7EA00E610CF /* Semaphore.swift */; };
 		055EF4A11EFBE7F800E610CF /* UnfairLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF48F1EFBE7EA00E610CF /* UnfairLock.swift */; };
@@ -219,7 +218,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				055EF49E1EFBE7F800E610CF /* sem_t.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
