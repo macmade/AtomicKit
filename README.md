@@ -94,8 +94,6 @@ public func unlock()
 public func tryLock( for intent: Intent ) -> Bool
 ```
 
-Internally, the `RWLock` class uses `pthread_rwlock_t`.
-
 Atomic Properties
 ------------------------
 
