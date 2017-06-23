@@ -1,0 +1,3 @@
+[submodule "Submodules/STDThreadKit"]
+	path = Submodules/STDThreadKit
+	url = https://github.com/macmade/STDThreadKit.git
