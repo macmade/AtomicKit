@@ -30,7 +30,7 @@
 import XCTest
 import AtomicKit
 
-class UnfairLockTest: LockableTestBase< UnfairLock >
+class UnfairLockTest: XCTestCase
 {
     override func setUp()
     {

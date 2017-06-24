@@ -43,13 +43,15 @@
 		055EF4A01EFBE7F800E610CF /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4941EFBE7EA00E610CF /* Semaphore.swift */; };
 		055EF4A11EFBE7F800E610CF /* UnfairLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF48F1EFBE7EA00E610CF /* UnfairLock.swift */; };
 		055EF4AA1EFBE83E00E610CF /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4A61EFBE83B00E610CF /* Atomic.swift */; };
-		055EF4AB1EFBE83E00E610CF /* LockableTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4A91EFBE83B00E610CF /* LockableTestBase.swift */; };
 		055EF4AC1EFBE83E00E610CF /* LockingValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4A41EFBE83B00E610CF /* LockingValue.swift */; };
 		055EF4AD1EFBE83E00E610CF /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4A81EFBE83B00E610CF /* Mutex.swift */; };
 		055EF4AE1EFBE83E00E610CF /* RecursiveMutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4A51EFBE83B00E610CF /* RecursiveMutex.swift */; };
 		055EF4AF1EFBE83E00E610CF /* RWLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4A21EFBE83B00E610CF /* RWLock.swift */; };
 		055EF4B01EFBE83E00E610CF /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4A31EFBE83B00E610CF /* Semaphore.swift */; };
 		055EF4B11EFBE83E00E610CF /* UnfairLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4A71EFBE83B00E610CF /* UnfairLock.swift */; };
+		056763731EFD757C005118F7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056763721EFD757C005118F7 /* main.swift */; };
+		0567637A1EFD7597005118F7 /* Test-Helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 056763701EFD757C005118F7 /* Test-Helper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0567637D1EFD780C005118F7 /* AtomicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 055EF4671EFBE78100E610CF /* AtomicKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +83,34 @@
 			remoteGlobalIDString = 055EF4661EFBE78100E610CF;
 			remoteInfo = AtomicKit;
 		};
+		056763781EFD7590005118F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 055EF45E1EFBE78100E610CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0567636F1EFD757C005118F7;
+			remoteInfo = "Test-Helper";
+		};
+		0567637B1EFD77FD005118F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 055EF45E1EFBE78100E610CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 055EF4661EFBE78100E610CF;
+			remoteInfo = AtomicKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		056763771EFD758B005118F7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				0567637A1EFD7597005118F7 /* Test-Helper in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		052EF6151EFD68CB009E9A05 /* STDThreadKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = STDThreadKit.xcodeproj; path = Submodules/STDThreadKit/STDThreadKit.xcodeproj; sourceTree = "<group>"; };
@@ -130,7 +159,8 @@
 		055EF4A61EFBE83B00E610CF /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		055EF4A71EFBE83B00E610CF /* UnfairLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfairLock.swift; sourceTree = "<group>"; };
 		055EF4A81EFBE83B00E610CF /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
-		055EF4A91EFBE83B00E610CF /* LockableTestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockableTestBase.swift; sourceTree = "<group>"; };
+		056763701EFD757C005118F7 /* Test-Helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Test-Helper"; sourceTree = BUILT_PRODUCTS_DIR; };
+		056763721EFD757C005118F7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +177,14 @@
 			files = (
 				052EF6201EFD68DB009E9A05 /* STDThreadKit.framework in Frameworks */,
 				055EF4711EFBE78100E610CF /* AtomicKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0567636D1EFD757C005118F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0567637D1EFD780C005118F7 /* AtomicKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +208,7 @@
 				0551EAFF1EFC25D900D137B9 /* README.md */,
 				055EF4691EFBE78100E610CF /* AtomicKit */,
 				055EF4741EFBE78100E610CF /* AtomicKitTests */,
+				056763711EFD757C005118F7 /* Test-Helper */,
 				055EF4681EFBE78100E610CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -179,6 +218,7 @@
 			children = (
 				055EF4671EFBE78100E610CF /* AtomicKit.framework */,
 				055EF4701EFBE78100E610CF /* AtomicKitTests.xctest */,
+				056763701EFD757C005118F7 /* Test-Helper */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,7 +247,6 @@
 				0551EAF21EFC24C500D137B9 /* DispatchedTreeController.swift */,
 				0551EA691EFBFFC900D137B9 /* DispatchedValue.swift */,
 				055EF4771EFBE78100E610CF /* Info.plist */,
-				055EF4A91EFBE83B00E610CF /* LockableTestBase.swift */,
 				055EF4A41EFBE83B00E610CF /* LockingValue.swift */,
 				055EF4A81EFBE83B00E610CF /* Mutex.swift */,
 				055EF4A51EFBE83B00E610CF /* RecursiveMutex.swift */,
@@ -245,6 +284,14 @@
 				055EF48F1EFBE7EA00E610CF /* UnfairLock.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		056763711EFD757C005118F7 /* Test-Helper */ = {
+			isa = PBXGroup;
+			children = (
+				056763721EFD757C005118F7 /* main.swift */,
+			);
+			path = "Test-Helper";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,10 +334,12 @@
 				055EF46C1EFBE78100E610CF /* Sources */,
 				055EF46D1EFBE78100E610CF /* Frameworks */,
 				055EF46E1EFBE78100E610CF /* Resources */,
+				056763771EFD758B005118F7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				056763791EFD7590005118F7 /* PBXTargetDependency */,
 				052EF61F1EFD68D6009E9A05 /* PBXTargetDependency */,
 				055EF4731EFBE78100E610CF /* PBXTargetDependency */,
 			);
@@ -298,6 +347,23 @@
 			productName = AtomicKitTests;
 			productReference = 055EF4701EFBE78100E610CF /* AtomicKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0567636F1EFD757C005118F7 /* Test-Helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 056763741EFD757C005118F7 /* Build configuration list for PBXNativeTarget "Test-Helper" */;
+			buildPhases = (
+				0567636C1EFD757C005118F7 /* Sources */,
+				0567636D1EFD757C005118F7 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0567637C1EFD77FD005118F7 /* PBXTargetDependency */,
+			);
+			name = "Test-Helper";
+			productName = "Test-Helper";
+			productReference = 056763701EFD757C005118F7 /* Test-Helper */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -316,6 +382,9 @@
 					055EF46F1EFBE78100E610CF = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
+					};
+					0567636F1EFD757C005118F7 = {
+						CreatedOnToolsVersion = 9.0;
 					};
 				};
 			};
@@ -339,6 +408,7 @@
 			targets = (
 				055EF4661EFBE78100E610CF /* AtomicKit */,
 				055EF46F1EFBE78100E610CF /* AtomicKitTests */,
+				0567636F1EFD757C005118F7 /* Test-Helper */,
 			);
 		};
 /* End PBXProject section */
@@ -410,7 +480,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				055EF4AB1EFBE83E00E610CF /* LockableTestBase.swift in Sources */,
 				0551EAFA1EFC25C300D137B9 /* DispatchedObject.swift in Sources */,
 				0551EAF61EFC25C300D137B9 /* DispatchedMutableArray.swift in Sources */,
 				055EF4AE1EFBE83E00E610CF /* RecursiveMutex.swift in Sources */,
@@ -431,6 +500,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0567636C1EFD757C005118F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				056763731EFD757C005118F7 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -443,6 +520,16 @@
 			isa = PBXTargetDependency;
 			target = 055EF4661EFBE78100E610CF /* AtomicKit */;
 			targetProxy = 055EF4721EFBE78100E610CF /* PBXContainerItemProxy */;
+		};
+		056763791EFD7590005118F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0567636F1EFD757C005118F7 /* Test-Helper */;
+			targetProxy = 056763781EFD7590005118F7 /* PBXContainerItemProxy */;
+		};
+		0567637C1EFD77FD005118F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 055EF4661EFBE78100E610CF /* AtomicKit */;
+			targetProxy = 0567637B1EFD77FD005118F7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -758,6 +845,30 @@
 			};
 			name = Release;
 		};
+		056763751EFD757C005118F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		056763761EFD757C005118F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -784,6 +895,15 @@
 			buildConfigurations = (
 				055EF47F1EFBE78100E610CF /* Debug */,
 				055EF4801EFBE78100E610CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		056763741EFD757C005118F7 /* Build configuration list for PBXNativeTarget "Test-Helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				056763751EFD757C005118F7 /* Debug */,
+				056763761EFD757C005118F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

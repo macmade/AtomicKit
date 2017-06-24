@@ -29,6 +29,12 @@
 
 #import "sem_t.h"
 
+#ifndef SEM_NAME_MAX
+#define SEM_NAME_MAX 32
+#endif
+
+const size_t XSAtomicKit_SEM_NAME_MAX = SEM_NAME_MAX;
+
 sem_t * XSAtomicKit_sem_open( const char * name, int flags, mode_t mode, int32_t value )
 {
     return sem_open( name, flags, mode, value );

@@ -23,22 +23,60 @@
  ******************************************************************************/
 
 /*!
- * @file        LockableTestBase.swift
+ * @file        main.swift
  * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
  */
 
-import XCTest
+import Foundation
 import AtomicKit
 
-class LockableTestBase< T: Lockable >: XCTestCase
+print( "Test-Helper: starting" )
+
+let argc = ProcessInfo.processInfo.arguments.count
+let argv = ProcessInfo.processInfo.arguments
+
+for i in 0 ... argc
 {
-    override func setUp()
-    {
-        super.setUp()
-    }
+    let arg = argv[ i ]
     
-    override func tearDown()
+    if( arg == "sem-wait" || arg == "sem-signal" )
     {
-        super.tearDown()
+        if( i >= argc - 2 )
+        {
+            print( "Test-Helper: not enough arguments provided for \(arg)" )
+            exit( -1 )
+        }
+        
+        let count = Int32( argv[ i + 1 ] )
+        let name  = argv[ i + 2 ]
+        
+        if( count == nil )
+        {
+            print( "Test-Helper: invalid argument for semaphore count" )
+            exit( -1 )
+        }
+        
+        let sem = try? Semaphore( count: count!, name: name )
+        
+        if( sem == nil )
+        {
+            print( "Test-Helper: cannot create semaphore" )
+            exit( -1 )
+        }
+        
+        if( arg == "sem-wait" )
+        {
+            print( "Test-Helper: wait on \( sem!.name ?? "" ) (\( count! ))" )
+            sem!.wait()
+        }
+        else
+        {
+            print( "Test-Helper: signal on \( sem!.name ?? "" ) (\( count! ))" )
+            sem!.signal()
+        }
+        
+        break;
     }
 }
+
+print( "Test-Helper: exiting" )

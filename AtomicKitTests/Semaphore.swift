@@ -30,16 +30,202 @@
 import XCTest
 import AtomicKit
 
-
 class SemaphoreTest: XCTestCase
 {
+    var testHelper: String?
+    
     override func setUp()
     {
         super.setUp()
+        
+        let bundle = Bundle( identifier: "com.xs-labs.AtomicKitTests" )
+        
+        if( bundle == nil || bundle?.executableURL == nil )
+        {
+            XCTFail( "Invalid bundle" )
+        }
+        
+        let url = bundle?.executableURL?.deletingLastPathComponent().appendingPathComponent( "Test-Helper" )
+        
+        if( url == nil || FileManager.default.fileExists( atPath: url!.path ) == false )
+        {
+            XCTFail( "Cannot find Test-Helper executable" )
+        }
+        
+        self.testHelper = url!.path
     }
     
     override func tearDown()
     {
         super.tearDown()
+    }
+    
+    func runHelper( command: String, args: [ String ] )
+    {
+        self.runHelper( commands: [ command : args ] )
+    }
+    
+    func runHelper( commands: [ String : [ String ] ] )
+    {
+        var args = [ String ]()
+        
+        if( self.testHelper == nil )
+        {
+            XCTFail( "Cannot find Test-Helper executable" )
+        }
+        
+        for p in commands
+        {
+            args.append( p.key )
+            args.append( contentsOf: p.value )
+        }
+        
+        let task = Process.launchedProcess( launchPath: self.testHelper!, arguments: args )
+        
+        task.waitUntilExit()
+    }
+    
+    func testUnnamedBinaryTryWait()
+    {
+        let sem = try? Semaphore()
+        
+        XCTAssertNotNil( sem )
+        XCTAssertTrue( sem!.tryWait() )
+        XCTAssertFalse( sem!.tryWait() )
+        
+        sem!.signal()
+    }
+    
+    func testNamedBinaryTryWait()
+    {
+        let sem1 = try? Semaphore( count: 1, name: "XS-Test-Semaphore-1" )
+        let sem2 = try? Semaphore( count: 1, name: "XS-Test-Semaphore-1" )
+        
+        XCTAssertNotNil( sem1 )
+        XCTAssertNotNil( sem2 )
+        
+        XCTAssertTrue(  sem1!.tryWait() )
+        XCTAssertFalse( sem1!.tryWait() )
+        XCTAssertFalse( sem2!.tryWait() )
+        
+        sem1!.signal()
+        
+        XCTAssertTrue(  sem2!.tryWait() )
+        XCTAssertFalse( sem2!.tryWait() )
+        XCTAssertFalse( sem1!.tryWait() )
+        
+        sem2!.signal()
+    }
+    
+    func testUnnamedTryWait()
+    {
+        let sem = try? Semaphore( count: 2 )
+        
+        XCTAssertNotNil( sem )
+        XCTAssertTrue(  sem!.tryWait() )
+        XCTAssertTrue(  sem!.tryWait() )
+        XCTAssertFalse( sem!.tryWait() )
+        
+        sem!.signal()
+        sem!.signal()
+    }
+    
+    func testNamedTryWait()
+    {
+        let sem1 = try? Semaphore( count: 2, name: "XS-Test-Semaphore-2" )
+        let sem2 = try? Semaphore( count: 2, name: "XS-Test-Semaphore-2" )
+        
+        XCTAssertNotNil( sem1 )
+        XCTAssertNotNil( sem2 )
+        
+        XCTAssertTrue(  sem1!.tryWait() )
+        XCTAssertTrue(  sem1!.tryWait() )
+        XCTAssertFalse( sem1!.tryWait() )
+        XCTAssertFalse( sem2!.tryWait() )
+        
+        sem1!.signal()
+        
+        XCTAssertTrue(  sem2!.tryWait() )
+        XCTAssertFalse( sem1!.tryWait() )
+        
+        sem1!.signal()
+        sem2!.signal()
+    }
+    
+    func testUnnamedWaitSignal()
+    {
+        let sem = try? Semaphore( count: 1 )
+        
+        XCTAssertNotNil( sem )
+        sem!.wait()
+        XCTAssertFalse( sem!.tryWait() )
+        sem!.signal()
+        XCTAssertTrue( sem!.tryWait() )
+        sem!.signal()
+    }
+    
+    func testNamedWaitSignal()
+    {
+        let sem1 = try? Semaphore( count: 1, name: "XS-Test-Semaphore-1" )
+        let sem2 = try? Semaphore( count: 1, name: "XS-Test-Semaphore-1" )
+        
+        XCTAssertNotNil( sem1 )
+        XCTAssertNotNil( sem2 )
+        
+        sem1!.wait()
+        
+        XCTAssertFalse( sem1!.tryWait() )
+        XCTAssertFalse( sem2!.tryWait() )
+        
+        sem1!.signal()
+        
+        XCTAssertTrue(  sem2!.tryWait() )
+        XCTAssertFalse( sem1!.tryWait() )
+        
+        sem2!.signal()
+    }
+
+    func testUnnamedThrowOnInvalidCount()
+    {
+        XCTAssertThrowsError( try Semaphore( count: 0 ) );
+    }
+
+    func testNamedThrowOnInvalidCount()
+    {
+        XCTAssertThrowsError( try Semaphore( count: 0, name: "XS-Test-Semaphore-0" ) );
+    }
+    
+    func testNamedThrowOnInvalidName()
+    {
+        var name = "XS-Test-Semaphore-"
+        
+        for _ in 0 ... 256
+        {
+            name += "X";
+        }
+        
+        XCTAssertThrowsError( try Semaphore( count: 1, name:name ) );
+    }
+    
+    func testIsNamed()
+    {
+        let sem1 = try? Semaphore( count: 1, name: "XS-Test-Semaphore-1" )
+        let sem2 = try? Semaphore()
+        
+        XCTAssertNotNil( sem1 )
+        XCTAssertNotNil( sem2 )
+        XCTAssertTrue(   sem1!.isNamed );
+        XCTAssertFalse(  sem2!.isNamed );
+    }
+    
+    func testGetName()
+    {
+        let sem1 = try? Semaphore( count: 1, name: "XS-Test-Semaphore-1" )
+        let sem2 = try? Semaphore()
+        
+        XCTAssertNotNil( sem1 )
+        XCTAssertNotNil( sem2 )
+        XCTAssertEqual( sem1!.name, "/XS-Test-Semaphore-1" )
+        XCTAssertEqual( sem2!.name, nil )
     }
 }

@@ -29,8 +29,9 @@
 
 import XCTest
 import AtomicKit
+import STDThreadKit
 
-class MutexTest: LockableTestBase< Mutex >
+class MutexTest: XCTestCase
 {
     override func setUp()
     {
@@ -40,5 +41,62 @@ class MutexTest: LockableTestBase< Mutex >
     override func tearDown()
     {
         super.tearDown()
+    }
+    
+    func testLock_SameThread()
+    {
+        let m = try? Mutex()
+        
+        XCTAssertNotNil( m )
+        XCTAssertTrue( m!.tryLock() )
+        
+        m!.unlock()
+    }
+    
+    func testMultipleLock_SameThread()
+    {
+        let m = try? Mutex()
+        
+        XCTAssertNotNil( m )
+        XCTAssertTrue( m!.tryLock() )
+        XCTAssertFalse( m!.tryLock() )
+        
+        m!.unlock()
+    }
+    
+    func testLock_DifferentThreads()
+    {
+        let m = try? Mutex()
+        var b = false
+        
+        XCTAssertNotNil( m )
+        XCTAssertTrue( m!.tryLock() )
+        
+        let _ = try? STDThread
+        {
+            b = m!.tryLock()
+            
+            if( b )
+            {
+                m!.unlock()
+            }
+        }
+        .join()
+        
+        XCTAssertFalse( b )
+        m!.unlock()
+        
+        let _ = try? STDThread
+        {
+            b = m!.tryLock()
+            
+            if( b )
+            {
+                m!.unlock()
+            }
+        }
+        .join()
+        
+        XCTAssertTrue( b )
     }
 }

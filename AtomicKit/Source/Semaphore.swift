@@ -53,6 +53,11 @@ public class Semaphore
             throw Error.InvalidSemaphoreName
         }
         
+        if( name != nil && ( name?.utf8.count )! > XSAtomicKit_SEM_NAME_MAX )
+        {
+            throw Error.InvalidSemaphoreName
+        }
+        
         self.isNamed = name != nil
         self.name    = name
         
@@ -63,14 +68,14 @@ public class Semaphore
         
         if( self.isNamed )
         {
-            var cp = name?.cString( using: .utf8 ) 
+            let cp = name?.cString( using: .utf8 ) 
             
             if( cp == nil )
             {
                 throw Error.InvalidSemaphoreName
             }
             
-            self._semp = XSAtomicKit_sem_open( &( cp![ 0 ] ), O_CREAT, S_IRUSR | S_IWUSR, count )
+            self._semp = XSAtomicKit_sem_open( cp, O_CREAT, S_IRUSR | S_IWUSR, count )
             
             if( self._semp == nil )
             {
@@ -128,7 +133,7 @@ public class Semaphore
     {
         if( self.isNamed )
         {
-            return ( sem_trywait( self._semp ) == 0 ) ? true : false
+            return sem_trywait( self._semp ) == 0
         }
         else
         {
@@ -137,7 +142,7 @@ public class Semaphore
             ts.tv_sec  = 0
             ts.tv_nsec = 0
             
-            return ( semaphore_timedwait( self._semaphore!, ts ) == KERN_SUCCESS ) ? true : false
+            return semaphore_timedwait( self._semaphore!, ts ) == KERN_SUCCESS
         }
     }
     

@@ -29,4 +29,6 @@
 
 #import <semaphore.h>
 
+extern const size_t XSAtomicKit_SEM_NAME_MAX;
+
 sem_t * XSAtomicKit_sem_open( const char * name, int flags, mode_t mode, int32_t value );

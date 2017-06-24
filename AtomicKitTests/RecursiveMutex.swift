@@ -29,8 +29,9 @@
 
 import XCTest
 import AtomicKit
+import STDThreadKit
 
-class RecursiveMutexTest: LockableTestBase< RecursiveMutex >
+class RecursiveMutexTest: XCTestCase
 {
     override func setUp()
     {
@@ -40,5 +41,63 @@ class RecursiveMutexTest: LockableTestBase< RecursiveMutex >
     override func tearDown()
     {
         super.tearDown()
+    }
+    
+    func testLock_SameThread()
+    {
+        let m = try? RecursiveMutex()
+        
+        XCTAssertNotNil( m )
+        XCTAssertTrue( m!.tryLock() )
+        
+        m!.unlock()
+    }
+    
+    func testMultipleLock_SameThread()
+    {
+        let m = try? RecursiveMutex()
+        
+        XCTAssertNotNil( m )
+        XCTAssertTrue( m!.tryLock() )
+        XCTAssertTrue( m!.tryLock() )
+        
+        m!.unlock()
+        m!.unlock()
+    }
+    
+    func testLock_DifferentThreads()
+    {
+        let m = try? RecursiveMutex()
+        var b = false
+        
+        XCTAssertNotNil( m )
+        XCTAssertTrue( m!.tryLock() )
+        
+        let _ = try? STDThread
+        {
+            b = m!.tryLock()
+            
+            if( b )
+            {
+                m!.unlock()
+            }
+        }
+        .join()
+        
+        XCTAssertFalse( b )
+        m!.unlock()
+        
+        let _ = try? STDThread
+        {
+            b = m!.tryLock()
+            
+            if( b )
+            {
+                m!.unlock()
+            }
+        }
+        .join()
+        
+        XCTAssertTrue( b )
     }
 }
