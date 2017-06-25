@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-/*!
- * @header      sem_t.h
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
- */
-
 #import <semaphore.h>
 
 extern const size_t XSAtomicKit_SEM_NAME_MAX;

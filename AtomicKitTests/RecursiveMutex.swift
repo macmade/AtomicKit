@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-/*!
- * @file        RecursiveMutex.swift
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
- */
-
 import XCTest
 import AtomicKit
 import STDThreadKit

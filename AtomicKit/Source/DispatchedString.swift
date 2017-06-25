@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-/*!
- * @file        DispatchedString.swift
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
- */
-
 import Foundation
 
 @objc public class DispatchedString: NSObject, ThreadSafeValueWrapper

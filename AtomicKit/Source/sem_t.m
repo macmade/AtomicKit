@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-/*!
- * @file        sem_t.m
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
- */
-
 #import "sem_t.h"
 
 #ifndef SEM_NAME_MAX

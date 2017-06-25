@@ -22,9 +22,4 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-/*!
- * @file        AtomicKit.h
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
- */
-
 #import <AtomicKit/sem_t.h>

@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-/*!
- * @file        Atomic.swift
- * @copyright   (c) 2017, Jean-David Gadina - www.xs-labs.com
- */
-
 import XCTest
 import AtomicKit
 
