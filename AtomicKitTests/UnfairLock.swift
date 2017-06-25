@@ -29,6 +29,7 @@
 
 import XCTest
 import AtomicKit
+import STDThreadKit
 
 class UnfairLockTest: XCTestCase
 {
@@ -41,4 +42,59 @@ class UnfairLockTest: XCTestCase
     {
         super.tearDown()
     }
+    
+    func testLock_SameThread()
+    {
+        let l = UnfairLock()
+        
+        XCTAssertTrue( l.tryLock() )
+        
+        l.unlock()
+    }
+    
+    func testMultipleLock_SameThread()
+    {
+        let l = UnfairLock()
+        
+        XCTAssertTrue( l.tryLock() )
+        XCTAssertFalse( l.tryLock() )
+        
+        l.unlock()
+    }
+    
+    func testLock_DifferentThreads()
+    {
+        let l = UnfairLock()
+        var b = false
+        
+        XCTAssertTrue( l.tryLock() )
+        
+        let _ = try? STDThread
+        {
+            b = l.tryLock()
+            
+            if( b )
+            {
+                l.unlock()
+            }
+        }
+        .join()
+        
+        XCTAssertFalse( b )
+        l.unlock()
+        
+        let _ = try? STDThread
+        {
+            b = l.tryLock()
+            
+            if( b )
+            {
+                l.unlock()
+            }
+        }
+        .join()
+        
+        XCTAssertTrue( b )
+    }
 }
+
