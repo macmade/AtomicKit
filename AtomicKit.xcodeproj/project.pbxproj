@@ -29,7 +29,6 @@
 		0551EAFA1EFC25C300D137B9 /* DispatchedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAEC1EFC24C500D137B9 /* DispatchedObject.swift */; };
 		0551EAFB1EFC25C300D137B9 /* DispatchedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAEF1EFC24C500D137B9 /* DispatchedString.swift */; };
 		0551EAFC1EFC25C300D137B9 /* DispatchedTreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAF21EFC24C500D137B9 /* DispatchedTreeController.swift */; };
-		0551EAFD1EFC25C300D137B9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 055EF4771EFBE78100E610CF /* Info.plist */; };
 		0551EB141EFD397C00D137B9 /* AtomicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0551EB131EFD397C00D137B9 /* AtomicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0551EB151EFD39F300D137B9 /* sem_t.h in Headers */ = {isa = PBXBuildFile; fileRef = 055EF4961EFBE7EA00E610CF /* sem_t.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		055EF4711EFBE78100E610CF /* AtomicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 055EF4671EFBE78100E610CF /* AtomicKit.framework */; };
@@ -161,6 +160,8 @@
 		055EF4A81EFBE83B00E610CF /* Mutex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutex.swift; sourceTree = "<group>"; };
 		056763701EFD757C005118F7 /* Test-Helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Test-Helper"; sourceTree = BUILT_PRODUCTS_DIR; };
 		056763721EFD757C005118F7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		05B3A04E1F004DFE00524F81 /* jazzy.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = jazzy.yml; sourceTree = "<group>"; };
+		05B3A04F1F004DFE00524F81 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +210,7 @@
 				055EF4691EFBE78100E610CF /* AtomicKit */,
 				055EF4741EFBE78100E610CF /* AtomicKitTests */,
 				056763711EFD757C005118F7 /* Test-Helper */,
+				05B3A04D1F004DFE00524F81 /* Documentation */,
 				055EF4681EFBE78100E610CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -292,6 +294,15 @@
 				056763721EFD757C005118F7 /* main.swift */,
 			);
 			path = "Test-Helper";
+			sourceTree = "<group>";
+		};
+		05B3A04D1F004DFE00524F81 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				05B3A04E1F004DFE00524F81 /* jazzy.yml */,
+				05B3A04F1F004DFE00524F81 /* Makefile */,
+			);
+			path = Documentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,6 +396,7 @@
 					};
 					0567636F1EFD757C005118F7 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -442,7 +454,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0551EAFD1EFC25C300D137B9 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
