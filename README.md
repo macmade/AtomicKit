@@ -29,6 +29,11 @@ Writing atomic/dispatched getters and setters is not a big deal, but it currentl
 
 The **AtomicKit** project intends to simplify this, by adding easy-to-use synchronization Swift types.
 
+Documentation
+-------------
+
+Documentation and API reference can be found at: http://doc.xs-labs.com/AtomicKit/
+
 Synchronization Primitives
 --------------------------
 
