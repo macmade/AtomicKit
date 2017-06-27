@@ -24,8 +24,16 @@
 
 import Foundation
 
+/**
+ * Swift wrapper class for `os_unfair_lock_t`.  
+ * A low-level lock that allows waiters to block efficiently on contention.
+ */
 public class UnfairLock: Lockable
 {
+    /**
+     * Designated initializer.
+     * Initializes an unfair lock object.
+     */
     public required init()
     {
         self._lock = os_unfair_lock_t.allocate( capacity: 1 )
@@ -39,16 +47,27 @@ public class UnfairLock: Lockable
         self._lock.deallocate( capacity: 1 )
     }
     
+    /**
+     * Locks an unfair lock.
+     */
     public func lock()
     {
         os_unfair_lock_lock( self._lock )
     }
     
+    /**
+     * Unlocks an unfair lock.
+     */
     public func unlock()
     {
         os_unfair_lock_unlock( self._lock )
     }
     
+    /**
+     * Tries to lock an unfair lock if it is not already locked.
+     * 
+     * - returns:   `true` if the lock was successfully locked, otherwise `false`.
+     */
     public func tryLock() -> Bool
     {
         return os_unfair_lock_trylock( self._lock )

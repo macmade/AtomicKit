@@ -24,21 +24,70 @@
 
 import Foundation
 
+/**
+ * Represents a semaphore object.  
+ * Note that named semaphores are shared accross different processes.
+ */
 public class Semaphore
 {
-    public private( set ) var isNamed: Bool
-    public private( set ) var name:    String?
+    /**
+     * The maximum length for a semaphore name.
+     */
+    public static var nameMaximumLength: Int
+    {
+        return XSAtomicKit_SEM_NAME_MAX
+    }
     
+    /**
+     * Whether the semaphore is named.  
+     * Note that named semaphores are shared accross different processes.
+     */
+    public private( set ) var isNamed: Bool
+    
+    /**
+     * The name of the semaphore, if any.  
+     * Note that named semaphores are shared accross different processes.
+     */
+    public private( set ) var name: String?
+    
+    /**
+     * `Semaphore` errors.
+     */
     public enum Error: Swift.Error
     {
+        /**
+         * Invalid semaphore count.  
+         * This might be thrown when initializing a semaphore object with
+         * a negative value or zero as count.
+         */
         case InvalidSemaphoreCount
+        
+        /**
+         * Invalid semaphore name.  
+         * This might be thrown when initializing a semaphore object with
+         * an invalid name, or a name which is too long.
+         */
         case InvalidSemaphoreName
+        
+        /**
+         * Thrown when a failure occurs trying to initialize the native
+         * semaphore type.
+         */
         case CannotCreateSemaphore
     }
     
+    /**
+     * Initializes a semaphore object.
+     * 
+     * - parameter count:   The count for the semaphore. Greater than zero.
+     * - parameter name:    An optional name for the semaphore.  
+     *                      Note that named semaphores are shared accross
+     *                      different processes.
+     * - throws:            `Semaphore.Error` on failure.
+     */
     public init( count: Int32 = 1, name: String? = nil ) throws
     {
-        if( count == 0 )
+        if( count <= 0 )
         {
             throw Error.InvalidSemaphoreCount
         }
@@ -100,6 +149,9 @@ public class Semaphore
         }
     }
     
+    /**
+     * Locks the semaphore.
+     */
     public func wait()
     {
         if( self.isNamed )
@@ -112,6 +164,9 @@ public class Semaphore
         }
     }
     
+    /**
+     * Signals (unlocks) the semaphore.
+     */
     public func signal()
     {
         if( self.isNamed )
@@ -124,6 +179,11 @@ public class Semaphore
         }
     }
     
+    /**
+     * Tries to lock the semaphore.
+     * 
+     * - returns:   `true` if the semaphore was successfully locked, otherwise `false`.
+     */
     public func tryWait() -> Bool
     {
         if( self.isNamed )

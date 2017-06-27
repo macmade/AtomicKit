@@ -24,19 +24,48 @@
 
 import Foundation
 
+/**
+ * Represents a reader-writer lock.  
+ * Note that this implementation is recursive.
+ * 
+ * Using a reader-writer lock, multiple treads can lock for reading, if no
+ * writer is currently holding the lock.  
+ * Only one writer can hold the lock, preventing readers to acquire it.
+ */
 public class RWLock
 {
+    /**
+     * `RWLock` errors.
+     */
     public enum Error: Swift.Error
     {
+        /**
+         * Thrown on initialization failures.
+         */
         case CannotCreateMutex
     }
     
+    /**
+     * Locing intent.
+     */
     public enum Intent
     {
+        /**
+         * Intent for reading operations.
+         */
         case reading
+        
+        /**
+         * Intent for writing operations.
+         */
         case writing
     }
     
+    /**
+     * Initializer.
+     * 
+     * - throws: `RWLock.error` on initialization failure.
+     */
     public init() throws
     {
         self._r = 0;
@@ -52,6 +81,12 @@ public class RWLock
         }
     }
     
+    /**
+     * Acquires the lock.
+     * 
+     * - parameter intent:  The intent. See `RWLock.Intent`.
+     * - seealso:          `RWLock.Intent`
+     */
     public func lock( for intent: Intent )
     {
         if( intent == .reading )
@@ -73,6 +108,12 @@ public class RWLock
         }
     }
     
+    /**
+     * Releases the lock.
+     * 
+     * - parameter intent:  The intent. See `RWLock.Intent`.
+     * - seealso:          `RWLock.Intent`
+     */
     public func unlock( for intent: Intent )
     {
         if( intent == .reading )
@@ -97,6 +138,13 @@ public class RWLock
         }
     }
     
+    /**
+     * Tries to acquires the lock.
+     * 
+     * - parameter intent:  The intent. See `RWLock.Intent`.
+     * - returns:          `true` if the lock was successfully locked, otherwise `false`.
+     * - seealso:          `RWLock.Intent`
+     */
     public func tryLock( for intent: Intent ) -> Bool
     {
         if( intent == .reading )

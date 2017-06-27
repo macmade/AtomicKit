@@ -26,4 +26,16 @@
 
 extern const size_t XSAtomicKit_SEM_NAME_MAX;
 
+/**
+ * Creates or opens a POSIX semaphore object (`sem_t`).
+ * 
+ * This is a replacement for the `sem_open` function. As it's variadic, it
+ * cannot be used from Swift,
+ * 
+ * @param       name    The name of the semaphore.
+ * @param       flags   The flags controlling the call operation.
+ * @param       mode    The semaphore permissions.
+ * @param       value   The initial semaphore value.
+ * @returns     The semaphore object.
+ */
 sem_t * XSAtomicKit_sem_open( const char * name, int flags, mode_t mode, int32_t value );

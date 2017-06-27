@@ -24,9 +24,23 @@
 
 import Foundation
 
+/**
+ * Protocol for `AtomicKit` lockable objects.  
+ * This extends `NSLocking` by adding the `tryLock` method.
+ */
 public protocol Lockable: NSLocking
 {
+    /**
+     * Required initializer.
+     * 
+     * - throws:    An error if the lockable object failed to initialize.
+     */
     init() throws
     
+    /**
+     * Tries to acquire the lock.
+     * 
+     * - returns:   `true` if the lock was successfully acquired, otherwise `false`.
+     */
     func tryLock() -> Bool
 }
