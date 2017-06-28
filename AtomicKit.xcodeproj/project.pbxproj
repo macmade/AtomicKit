@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0516079A1F042B2D00E732FC /* DispatchedValueTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051607981F042A6700E732FC /* DispatchedValueTestHelper.swift */; };
 		0516079C1F042C0900E732FC /* DispatchedValueWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516079B1F042C0900E732FC /* DispatchedValueWrapper.swift */; };
+		0516079F1F046AF600E732FC /* DispatchedDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516079D1F046AB500E732FC /* DispatchedDictionaryController.swift */; };
+		051607A01F046AF900E732FC /* DispatchedDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516079E1F046ACB00E732FC /* DispatchedDictionaryController.swift */; };
 		052EF6201EFD68DB009E9A05 /* STDThreadKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052EF61B1EFD68CB009E9A05 /* STDThreadKit.framework */; };
 		053D2A8E1F02E73C00415CE9 /* DispatchedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053D2A8C1F02E68F00415CE9 /* DispatchedValue.swift */; };
 		0551EA681EFBFFB000D137B9 /* DispatchedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EA671EFBFFB000D137B9 /* DispatchedValue.swift */; };
@@ -116,6 +118,8 @@
 /* Begin PBXFileReference section */
 		051607981F042A6700E732FC /* DispatchedValueTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValueTestHelper.swift; sourceTree = "<group>"; };
 		0516079B1F042C0900E732FC /* DispatchedValueWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValueWrapper.swift; sourceTree = "<group>"; };
+		0516079D1F046AB500E732FC /* DispatchedDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedDictionaryController.swift; sourceTree = "<group>"; };
+		0516079E1F046ACB00E732FC /* DispatchedDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedDictionaryController.swift; sourceTree = "<group>"; };
 		052EF6151EFD68CB009E9A05 /* STDThreadKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = STDThreadKit.xcodeproj; path = Submodules/STDThreadKit/STDThreadKit.xcodeproj; sourceTree = "<group>"; };
 		053D2A8C1F02E68F00415CE9 /* DispatchedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValue.swift; sourceTree = "<group>"; };
 		0551EA671EFBFFB000D137B9 /* DispatchedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValue.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 				055EF4A61EFBE83B00E610CF /* Atomic.swift */,
 				0551EAF11EFC24C500D137B9 /* DispatchedArrayController.swift */,
 				0551EAF31EFC24C500D137B9 /* DispatchedBool.swift */,
+				0516079D1F046AB500E732FC /* DispatchedDictionaryController.swift */,
 				0551EAF01EFC24C500D137B9 /* DispatchedMutableArray.swift */,
 				0551EAEE1EFC24C500D137B9 /* DispatchedMutableDictionary.swift */,
 				0551EAEB1EFC24C500D137B9 /* DispatchedMutableSet.swift */,
@@ -271,6 +276,7 @@
 				0551EB131EFD397C00D137B9 /* AtomicKit.h */,
 				0551EAE11EFC1E6200D137B9 /* DispatchedArrayController.swift */,
 				0551EAC51EFC13D600D137B9 /* DispatchedBool.swift */,
+				0516079E1F046ACB00E732FC /* DispatchedDictionaryController.swift */,
 				0551EAE51EFC1ECE00D137B9 /* DispatchedMutableArray.swift */,
 				0551EAE71EFC1EDF00D137B9 /* DispatchedMutableDictionary.swift */,
 				0551EAE91EFC1EED00D137B9 /* DispatchedMutableSet.swift */,
@@ -480,6 +486,7 @@
 				0551EAE41EFC1EA600D137B9 /* DispatchedTreeController.swift in Sources */,
 				0551EAE61EFC1ECE00D137B9 /* DispatchedMutableArray.swift in Sources */,
 				0551EAE21EFC1E6200D137B9 /* DispatchedArrayController.swift in Sources */,
+				051607A01F046AF900E732FC /* DispatchedDictionaryController.swift in Sources */,
 				0551EAC61EFC13D600D137B9 /* DispatchedBool.swift in Sources */,
 				0551EA681EFBFFB000D137B9 /* DispatchedValue.swift in Sources */,
 				0551EACC1EFC156D00D137B9 /* DispatchedObject.swift in Sources */,
@@ -513,6 +520,7 @@
 				055EF4AA1EFBE83E00E610CF /* Atomic.swift in Sources */,
 				0551EAFB1EFC25C300D137B9 /* DispatchedString.swift in Sources */,
 				0551EAFC1EFC25C300D137B9 /* DispatchedTreeController.swift in Sources */,
+				0516079F1F046AF600E732FC /* DispatchedDictionaryController.swift in Sources */,
 				0551EAF91EFC25C300D137B9 /* DispatchedNumber.swift in Sources */,
 				0551EAF81EFC25C300D137B9 /* DispatchedMutableSet.swift in Sources */,
 				055EF4AF1EFBE83E00E610CF /* RWLock.swift in Sources */,
