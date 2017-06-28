@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class DispatchedValue< T >: ThreadSafeValueWrapper
+public class DispatchedValue< T >: DispatchedValueWrapper
 {
     public typealias ValueType = T
     
@@ -33,7 +33,7 @@ public class DispatchedValue< T >: ThreadSafeValueWrapper
         self.init( value: value, queue: DispatchQueue.main )
     }
     
-    public init( value: T, queue: DispatchQueue )
+    public required init( value: T, queue: DispatchQueue )
     {
         self._queue = queue
         self._value = value

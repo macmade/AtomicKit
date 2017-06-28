@@ -24,7 +24,7 @@
 
 import Cocoa
 
-@objc public class DispatchedMutableArray: NSObject
+@objc public class DispatchedMutableArray: NSObject, DispatchedValueWrapper
 {
     public typealias ValueType = NSMutableArray?
     
@@ -33,7 +33,7 @@ import Cocoa
         self.init( value: value, queue: DispatchQueue.main )
     }
     
-    public init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
+    public required init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
     {
         self._value = DispatchedValue< ValueType >( value: value, queue: queue )
     }

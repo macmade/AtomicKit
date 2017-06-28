@@ -24,7 +24,7 @@
 
 import Cocoa
 
-@objc public class DispatchedTreeController: NSObject
+@objc public class DispatchedTreeController: NSObject, DispatchedValueWrapper
 {
     public typealias ValueType = NSTreeController?
     
@@ -33,7 +33,7 @@ import Cocoa
         self.init( value: value, queue: DispatchQueue.main )
     }
     
-    public init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
+    public required init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
     {
         self._value = DispatchedValue< ValueType >( value: value, queue: queue )
     }

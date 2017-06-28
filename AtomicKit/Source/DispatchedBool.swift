@@ -24,7 +24,7 @@
 
 import Foundation
 
-@objc public class DispatchedBool: NSObject
+@objc public class DispatchedBool: NSObject, DispatchedValueWrapper
 {
     public typealias ValueType = Bool
     
@@ -33,7 +33,7 @@ import Foundation
         self.init( value: value, queue: DispatchQueue.main )
     }
     
-    public init( value: ValueType = false, queue: DispatchQueue = DispatchQueue.main )
+    public required init( value: ValueType = false, queue: DispatchQueue = DispatchQueue.main )
     {
         self._value = DispatchedValue< ValueType >( value: value, queue: queue )
     }

@@ -24,7 +24,7 @@
 
 import Foundation
 
-@objc public class DispatchedString: NSObject, ThreadSafeValueWrapper
+@objc public class DispatchedString: NSObject, DispatchedValueWrapper
 {
     public typealias ValueType = String?
     
@@ -33,7 +33,7 @@ import Foundation
         self.init( value: value, queue: DispatchQueue.main )
     }
     
-    public init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
+    public required init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
     {
         self._value = DispatchedValue< ValueType >( value: value, queue: queue )
     }

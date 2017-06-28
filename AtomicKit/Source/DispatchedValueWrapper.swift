@@ -22,61 +22,10 @@
  * THE SOFTWARE.
  ******************************************************************************/
 
-import Cocoa
+import Foundation
 
-@objc public class DispatchedMutableSet: NSObject, DispatchedValueWrapper
+public protocol DispatchedValueWrapper: ThreadSafeValueWrapper
 {
-    public typealias ValueType = NSMutableSet?
-    
-    public required convenience init( value: ValueType )
-    {
-        self.init( value: value, queue: DispatchQueue.main )
-    }
-    
-    public required init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
-    {
-        self._value = DispatchedValue< ValueType >( value: value, queue: queue )
-    }
-    
-    @objc public dynamic var value: ValueType
-    {
-        get
-        {
-            return self._value.get()
-        }
-        
-        set( value )
-        {
-            self.willChangeValue( forKey: "value" )
-            self._value.set( value )
-            self.didChangeValue( forKey: "value" )
-        }
-    }
-    
-    public func get() -> ValueType
-    {
-        return self.value
-    }
-    
-    public func set( _ value: ValueType )
-    {
-        self.value = value
-    }
-    
-    public func execute( closure: ( ValueType ) -> Swift.Void )
-    {
-        self._value.execute( closure: closure )
-    }
-    
-    public func execute< R >( closure: ( ValueType ) -> R ) -> R
-    {
-        return self._value.execute( closure: closure )
-    }
-    
-    private var _value: DispatchedValue< ValueType >
+    init( value: ValueType, queue: DispatchQueue )
 }
-
-
-
-
 
