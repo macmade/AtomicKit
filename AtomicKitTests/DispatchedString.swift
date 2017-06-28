@@ -27,14 +27,63 @@ import AtomicKit
 
 class DispatchedStringTest: XCTestCase
 {
+    var _helper: DispatchedValueTestHelper< DispatchedString, String >?
+    
     override func setUp()
     {
         super.setUp()
+        
+        self._helper = DispatchedValueTestHelper( defaultValue: nil, testCase: self )
     }
     
     override func tearDown()
     {
         super.tearDown()
+    }
+    
+    func testGetSet_MainQueue()
+    {
+        self._helper!.testGetSet_MainQueue( value: "hello, world" )
+    }
+    
+    func testGetSet_GlobalQueue()
+    {
+        self._helper!.testGetSet_GlobalQueue( value: "hello, world" )
+    }
+        
+    func testGetSet_CustomQueue()
+    {
+        self._helper!.testGetSet_CustomQueue( value: "hello, world" )
+    }
+    
+    func testExecute_NoReturn_MainQueue()
+    {
+        self._helper!.testExecute_NoReturn_MainQueue( value: "hello, world" )
+    }
+    
+    func testExecute_NoReturn_GlobalQueue()
+    {
+        self._helper!.testExecute_NoReturn_GlobalQueue( value: "hello, world" )
+    }
+    
+    func testExecute_NoReturn_CustomQueue()
+    {
+        self._helper!.testExecute_NoReturn_CustomQueue( value: "hello, world" )
+    }
+    
+    func testExecute_Return_MainQueue()
+    {
+        self._helper!.testExecute_Return_MainQueue( value: "hello, world" )
+    }
+    
+    func testExecute_Return_GlobalQueue()
+    {
+        self._helper!.testExecute_Return_GlobalQueue( value: "hello, world" )
+    }
+    
+    func testExecute_Return_CustomQueue()
+    {
+        self._helper!.testExecute_Return_CustomQueue( value: "hello, world" )
     }
 }
 
