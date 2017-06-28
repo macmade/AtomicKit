@@ -27,7 +27,7 @@ import AtomicKit
 
 class DispatchedTreeControllerTest: XCTestCase
 {
-    var _helper: DispatchedValueTestHelper< DispatchedObject, NSTreeController >?
+    var _helper: DispatchedValueTestHelper< DispatchedTreeController, NSTreeController >?
     var obj1:    NSTreeController?
     var obj2:    NSTreeController?
     

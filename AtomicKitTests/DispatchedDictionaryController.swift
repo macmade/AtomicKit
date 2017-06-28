@@ -27,7 +27,7 @@ import AtomicKit
 
 class DispatchedDictionaryControllerTest: XCTestCase
 {
-    var _helper: DispatchedValueTestHelper< DispatchedObject, NSDictionaryController >?
+    var _helper: DispatchedValueTestHelper< DispatchedDictionaryController, NSDictionaryController >?
     var obj1:    NSDictionaryController?
     var obj2:    NSDictionaryController?
     

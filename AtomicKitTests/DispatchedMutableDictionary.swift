@@ -27,7 +27,7 @@ import AtomicKit
 
 class DispatchedMutableDictionaryTest: XCTestCase
 {
-    var _helper: DispatchedValueTestHelper< DispatchedObject, NSMutableDictionary >?
+    var _helper: DispatchedValueTestHelper< DispatchedMutableDictionary, NSMutableDictionary >?
     var obj1:    NSMutableDictionary?
     var obj2:    NSMutableDictionary?
     

@@ -27,7 +27,7 @@ import AtomicKit
 
 class DispatchedMutableArrayTest: XCTestCase
 {
-    var _helper: DispatchedValueTestHelper< DispatchedObject, NSMutableArray >?
+    var _helper: DispatchedValueTestHelper< DispatchedMutableArray, NSMutableArray >?
     var obj1:    NSMutableArray?
     var obj2:    NSMutableArray?
     

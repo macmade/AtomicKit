@@ -27,7 +27,7 @@ import AtomicKit
 
 class DispatchedArrayControllerTest: XCTestCase
 {
-    var _helper: DispatchedValueTestHelper< DispatchedObject, NSArrayController >?
+    var _helper: DispatchedValueTestHelper< DispatchedArrayController, NSArrayController >?
     var obj1:    NSArrayController?
     var obj2:    NSArrayController?
     

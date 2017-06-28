@@ -27,7 +27,7 @@ import AtomicKit
 
 class DispatchedMutableSetTest: XCTestCase
 {
-    var _helper: DispatchedValueTestHelper< DispatchedObject, NSMutableSet >?
+    var _helper: DispatchedValueTestHelper< DispatchedMutableSet, NSMutableSet >?
     var obj1:    NSMutableSet?
     var obj2:    NSMutableSet?
     
