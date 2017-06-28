@@ -43,47 +43,47 @@ class DispatchedStringTest: XCTestCase
     
     func testGetSet_MainQueue()
     {
-        self._helper!.testGetSet_MainQueue( value: "hello, world" )
+        self._helper!.testGetSet_MainQueue( value: "hello, world", notValue: "hello, universe" )
     }
     
     func testGetSet_GlobalQueue()
     {
-        self._helper!.testGetSet_GlobalQueue( value: "hello, world" )
+        self._helper!.testGetSet_GlobalQueue( value: "hello, world", notValue: "hello, universe" )
     }
         
     func testGetSet_CustomQueue()
     {
-        self._helper!.testGetSet_CustomQueue( value: "hello, world" )
+        self._helper!.testGetSet_CustomQueue( value: "hello, world", notValue: "hello, universe" )
     }
     
     func testExecute_NoReturn_MainQueue()
     {
-        self._helper!.testExecute_NoReturn_MainQueue( value: "hello, world" )
+        self._helper!.testExecute_NoReturn_MainQueue( value: "hello, world", notValue: "hello, universe" )
     }
     
     func testExecute_NoReturn_GlobalQueue()
     {
-        self._helper!.testExecute_NoReturn_GlobalQueue( value: "hello, world" )
+        self._helper!.testExecute_NoReturn_GlobalQueue( value: "hello, world", notValue: "hello, universe" )
     }
     
     func testExecute_NoReturn_CustomQueue()
     {
-        self._helper!.testExecute_NoReturn_CustomQueue( value: "hello, world" )
+        self._helper!.testExecute_NoReturn_CustomQueue( value: "hello, world", notValue: "hello, universe" )
     }
     
     func testExecute_Return_MainQueue()
     {
-        self._helper!.testExecute_Return_MainQueue( value: "hello, world" )
+        self._helper!.testExecute_Return_MainQueue( value: "hello, world", notValue: "hello, universe" )
     }
     
     func testExecute_Return_GlobalQueue()
     {
-        self._helper!.testExecute_Return_GlobalQueue( value: "hello, world" )
+        self._helper!.testExecute_Return_GlobalQueue( value: "hello, world", notValue: "hello, universe" )
     }
     
     func testExecute_Return_CustomQueue()
     {
-        self._helper!.testExecute_Return_CustomQueue( value: "hello, world" )
+        self._helper!.testExecute_Return_CustomQueue( value: "hello, world", notValue: "hello, universe" )
     }
 }
 

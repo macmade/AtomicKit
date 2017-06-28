@@ -46,52 +46,52 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
         self._queue.setSpecific( key: self._key, value: self._uuid )
     }
     
-    func testGetSet_MainQueue( value: T.ValueType )
+    func testGetSet_MainQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testGetSet( value: value, queue: DispatchQueue.main )
+        self.testGetSet( value: value, notValue: notValue, queue: DispatchQueue.main )
     }
     
-    func testGetSet_GlobalQueue( value: T.ValueType )
+    func testGetSet_GlobalQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testGetSet( value: value, queue: DispatchQueue.global( qos: .userInitiated ) )
+        self.testGetSet( value: value, notValue: notValue, queue: DispatchQueue.global( qos: .userInitiated ) )
     }
     
-    func testGetSet_CustomQueue( value: T.ValueType )
+    func testGetSet_CustomQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testGetSet( value: value, queue: self._queue )
+        self.testGetSet( value: value, notValue: notValue, queue: self._queue )
     }
     
-    func testExecute_NoReturn_MainQueue( value: T.ValueType )
+    func testExecute_NoReturn_MainQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testExecute_NoReturn( value: value, queue: DispatchQueue.main )
+        self.testExecute_NoReturn( value: value, notValue: notValue, queue: DispatchQueue.main )
     }
     
-    func testExecute_NoReturn_GlobalQueue( value: T.ValueType )
+    func testExecute_NoReturn_GlobalQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testExecute_NoReturn( value: value, queue: DispatchQueue.global( qos: .userInitiated ) )
+        self.testExecute_NoReturn( value: value, notValue: notValue, queue: DispatchQueue.global( qos: .userInitiated ) )
     }
     
-    func testExecute_NoReturn_CustomQueue( value: T.ValueType )
+    func testExecute_NoReturn_CustomQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testExecute_NoReturn( value: value, queue: self._queue )
+        self.testExecute_NoReturn( value: value, notValue: notValue, queue: self._queue )
     }
     
-    func testExecute_Return_MainQueue( value: T.ValueType )
+    func testExecute_Return_MainQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testExecute_Return( value: value, queue: DispatchQueue.main )
+        self.testExecute_Return( value: value, notValue: notValue, queue: DispatchQueue.main )
     }
     
-    func testExecute_Return_GlobalQueue( value: T.ValueType )
+    func testExecute_Return_GlobalQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testExecute_Return( value: value, queue: DispatchQueue.global( qos: .userInitiated ) )
+        self.testExecute_Return( value: value, notValue: notValue, queue: DispatchQueue.global( qos: .userInitiated ) )
     }
     
-    func testExecute_Return_CustomQueue( value: T.ValueType )
+    func testExecute_Return_CustomQueue( value: T.ValueType, notValue: T.ValueType )
     {
-        self.testExecute_Return( value: value, queue: self._queue )
+        self.testExecute_Return( value: value, notValue: notValue, queue: self._queue )
     }
     
-    func testGetSet( value: T.ValueType, queue: DispatchQueue )
+    func testGetSet( value: T.ValueType, notValue: T.ValueType, queue: DispatchQueue )
     {
         let e = self._test.expectation( description: "testGetSet" )
         
@@ -108,6 +108,8 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
             
             XCTAssertEqual( self._v1.get() as? U, value as? U )
             XCTAssertEqual( self._v2.get() as? U, value as? U )
+            XCTAssertNotEqual( self._v1.get() as? U, notValue as? U )
+            XCTAssertNotEqual( self._v2.get() as? U, notValue as? U )
             
             e.fulfill()
         }
@@ -115,7 +117,7 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
         self._test.waitForExpectations( timeout: 1 )
     }
     
-    func testExecute_NoReturn( value: T.ValueType, queue: DispatchQueue )
+    func testExecute_NoReturn( value: T.ValueType, notValue: T.ValueType, queue: DispatchQueue )
     {
         let e = self._test.expectation( description: "testExecute_NoReturn" )
         
@@ -140,6 +142,7 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
                 ( v: T.ValueType ) in
                 
                 XCTAssertEqual( v as? U, value as? U )
+                XCTAssertNotEqual( v as? U, notValue as? U )
                 XCTAssertEqual( DispatchQueue.getSpecific( key: self._key ), self._uuid )
             }
             
@@ -162,6 +165,7 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
                 ( v: T.ValueType ) in
                 
                 XCTAssertEqual( v as? U, value as? U )
+                XCTAssertNotEqual( v as? U, notValue as? U )
                 XCTAssertEqual( DispatchQueue.getSpecific( key: self._key ), DispatchQueue.main.getSpecific( key: self._key ) )
             }
             
@@ -171,7 +175,7 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
         self._test.waitForExpectations( timeout: 1 )
     }
     
-    func testExecute_Return( value: T.ValueType, queue: DispatchQueue )
+    func testExecute_Return( value: T.ValueType, notValue: T.ValueType, queue: DispatchQueue )
     {
         let e = self._test.expectation( description: "testExecute_Return_MainQueue" )
         
@@ -200,6 +204,7 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
                 ( v: T.ValueType ) -> Int in
                 
                 XCTAssertEqual( v as? U, value as? U )
+                XCTAssertNotEqual( v as? U, notValue as? U )
                 XCTAssertEqual( DispatchQueue.getSpecific( key: self._key ), self._uuid )
                 
                 return 42
@@ -230,6 +235,7 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
                 ( v: T.ValueType ) -> Int in
                 
                 XCTAssertEqual( v as? U, value as? U )
+                XCTAssertNotEqual( v as? U, notValue as? U )
                 XCTAssertEqual( DispatchQueue.getSpecific( key: self._key ), DispatchQueue.main.getSpecific( key: self._key ) )
                 
                 return 42
