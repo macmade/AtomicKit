@@ -27,13 +27,66 @@ import AtomicKit
 
 class DispatchedTreeControllerTest: XCTestCase
 {
+    var _helper: DispatchedValueTestHelper< DispatchedObject, NSTreeController >?
+    var obj1:    NSTreeController?
+    var obj2:    NSTreeController?
+    
     override func setUp()
     {
         super.setUp()
+        
+        self._helper = DispatchedValueTestHelper( defaultValue: nil, testCase: self )
+        self.obj1    = NSTreeController()
+        self.obj2    = NSTreeController()
     }
     
     override func tearDown()
     {
         super.tearDown()
+    }
+    
+    func testGetSet_MainQueue()
+    {
+        self._helper!.testGetSet_MainQueue( value: self.obj1, notValue: self.obj2 )
+    }
+    
+    func testGetSet_GlobalQueue()
+    {
+        self._helper!.testGetSet_GlobalQueue( value: self.obj1, notValue: self.obj2 )
+    }
+        
+    func testGetSet_CustomQueue()
+    {
+        self._helper!.testGetSet_CustomQueue( value: self.obj1, notValue: self.obj2 )
+    }
+    
+    func testExecute_NoReturn_MainQueue()
+    {
+        self._helper!.testExecute_NoReturn_MainQueue( value: self.obj1, notValue: self.obj2 )
+    }
+    
+    func testExecute_NoReturn_GlobalQueue()
+    {
+        self._helper!.testExecute_NoReturn_GlobalQueue( value: self.obj1, notValue: self.obj2 )
+    }
+    
+    func testExecute_NoReturn_CustomQueue()
+    {
+        self._helper!.testExecute_NoReturn_CustomQueue( value: self.obj1, notValue: self.obj2 )
+    }
+    
+    func testExecute_Return_MainQueue()
+    {
+        self._helper!.testExecute_Return_MainQueue( value: self.obj1, notValue: self.obj2 )
+    }
+    
+    func testExecute_Return_GlobalQueue()
+    {
+        self._helper!.testExecute_Return_GlobalQueue( value: self.obj1, notValue: self.obj2 )
+    }
+    
+    func testExecute_Return_CustomQueue()
+    {
+        self._helper!.testExecute_Return_CustomQueue( value: self.obj1, notValue: self.obj2 )
     }
 }
