@@ -86,6 +86,3 @@ class DispatchedNumberTest: XCTestCase
         self._helper!.testExecute_Return_CustomQueue( value: 42, notValue: 43 )
     }
 }
-
-
-

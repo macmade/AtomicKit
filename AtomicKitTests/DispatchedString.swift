@@ -86,5 +86,3 @@ class DispatchedStringTest: XCTestCase
         self._helper!.testExecute_Return_CustomQueue( value: "hello, world", notValue: "hello, universe" )
     }
 }
-
-

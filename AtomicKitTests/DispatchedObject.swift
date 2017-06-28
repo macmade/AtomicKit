@@ -37,5 +37,3 @@ class DispatchedObjectTest: XCTestCase
         super.tearDown()
     }
 }
-
-

@@ -92,4 +92,3 @@ class UnfairLockTest: XCTestCase
         XCTAssertTrue( b )
     }
 }
-

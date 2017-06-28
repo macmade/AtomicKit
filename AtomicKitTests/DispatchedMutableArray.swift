@@ -37,5 +37,3 @@ class DispatchedMutableArrayTest: XCTestCase
         super.tearDown()
     }
 }
-
-

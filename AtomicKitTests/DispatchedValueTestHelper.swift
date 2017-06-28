@@ -249,4 +249,3 @@ class DispatchedValueTestHelper< T: DispatchedValueWrapper, U > where U: Equatab
         self._test.waitForExpectations( timeout: 1 )
     }
 }
-
