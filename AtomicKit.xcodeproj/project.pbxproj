@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0516079A1F042B2D00E732FC /* DispatchedValueTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051607981F042A6700E732FC /* DispatchedValueTestHelper.swift */; };
+		0516079C1F042C0900E732FC /* DispatchedValueWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0516079B1F042C0900E732FC /* DispatchedValueWrapper.swift */; };
 		052EF6201EFD68DB009E9A05 /* STDThreadKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052EF61B1EFD68CB009E9A05 /* STDThreadKit.framework */; };
+		053D2A8E1F02E73C00415CE9 /* DispatchedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053D2A8C1F02E68F00415CE9 /* DispatchedValue.swift */; };
 		0551EA681EFBFFB000D137B9 /* DispatchedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EA671EFBFFB000D137B9 /* DispatchedValue.swift */; };
-		0551EA6A1EFBFFC900D137B9 /* DispatchedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EA691EFBFFC900D137B9 /* DispatchedValue.swift */; };
 		0551EAC61EFC13D600D137B9 /* DispatchedBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAC51EFC13D600D137B9 /* DispatchedBool.swift */; };
 		0551EAC81EFC142800D137B9 /* DispatchedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAC71EFC142800D137B9 /* DispatchedString.swift */; };
 		0551EACA1EFC14AA00D137B9 /* DispatchedNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAC91EFC14AA00D137B9 /* DispatchedNumber.swift */; };
@@ -112,9 +114,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		051607981F042A6700E732FC /* DispatchedValueTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValueTestHelper.swift; sourceTree = "<group>"; };
+		0516079B1F042C0900E732FC /* DispatchedValueWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValueWrapper.swift; sourceTree = "<group>"; };
 		052EF6151EFD68CB009E9A05 /* STDThreadKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = STDThreadKit.xcodeproj; path = Submodules/STDThreadKit/STDThreadKit.xcodeproj; sourceTree = "<group>"; };
+		053D2A8C1F02E68F00415CE9 /* DispatchedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValue.swift; sourceTree = "<group>"; };
 		0551EA671EFBFFB000D137B9 /* DispatchedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValue.swift; sourceTree = "<group>"; };
-		0551EA691EFBFFC900D137B9 /* DispatchedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedValue.swift; sourceTree = "<group>"; };
 		0551EAC51EFC13D600D137B9 /* DispatchedBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedBool.swift; sourceTree = "<group>"; };
 		0551EAC71EFC142800D137B9 /* DispatchedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedString.swift; sourceTree = "<group>"; };
 		0551EAC91EFC14AA00D137B9 /* DispatchedNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchedNumber.swift; sourceTree = "<group>"; };
@@ -247,7 +251,8 @@
 				0551EAEC1EFC24C500D137B9 /* DispatchedObject.swift */,
 				0551EAEF1EFC24C500D137B9 /* DispatchedString.swift */,
 				0551EAF21EFC24C500D137B9 /* DispatchedTreeController.swift */,
-				0551EA691EFBFFC900D137B9 /* DispatchedValue.swift */,
+				053D2A8C1F02E68F00415CE9 /* DispatchedValue.swift */,
+				051607981F042A6700E732FC /* DispatchedValueTestHelper.swift */,
 				055EF4771EFBE78100E610CF /* Info.plist */,
 				055EF4A41EFBE83B00E610CF /* LockingValue.swift */,
 				055EF4A81EFBE83B00E610CF /* Mutex.swift */,
@@ -274,6 +279,7 @@
 				0551EAC71EFC142800D137B9 /* DispatchedString.swift */,
 				0551EAE31EFC1EA600D137B9 /* DispatchedTreeController.swift */,
 				0551EA671EFBFFB000D137B9 /* DispatchedValue.swift */,
+				0516079B1F042C0900E732FC /* DispatchedValueWrapper.swift */,
 				055EF48E1EFBE7EA00E610CF /* Lockable.swift */,
 				055EF4921EFBE7EA00E610CF /* LockingValue.swift */,
 				055EF4951EFBE7EA00E610CF /* Mutex.swift */,
@@ -479,6 +485,7 @@
 				0551EACC1EFC156D00D137B9 /* DispatchedObject.swift in Sources */,
 				055EF49B1EFBE7F800E610CF /* Mutex.swift in Sources */,
 				0551EAE81EFC1EDF00D137B9 /* DispatchedMutableDictionary.swift in Sources */,
+				0516079C1F042C0900E732FC /* DispatchedValueWrapper.swift in Sources */,
 				055EF49D1EFBE7F800E610CF /* RWLock.swift in Sources */,
 				055EF49A1EFBE7F800E610CF /* LockingValue.swift in Sources */,
 				0551EAC81EFC142800D137B9 /* DispatchedString.swift in Sources */,
@@ -491,6 +498,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0516079A1F042B2D00E732FC /* DispatchedValueTestHelper.swift in Sources */,
 				0551EAFA1EFC25C300D137B9 /* DispatchedObject.swift in Sources */,
 				0551EAF61EFC25C300D137B9 /* DispatchedMutableArray.swift in Sources */,
 				055EF4AE1EFBE83E00E610CF /* RecursiveMutex.swift in Sources */,
@@ -498,11 +506,11 @@
 				055EF4B01EFBE83E00E610CF /* Semaphore.swift in Sources */,
 				0551EAF51EFC25C300D137B9 /* DispatchedBool.swift in Sources */,
 				0551EAF71EFC25C300D137B9 /* DispatchedMutableDictionary.swift in Sources */,
+				053D2A8E1F02E73C00415CE9 /* DispatchedValue.swift in Sources */,
 				055EF4AD1EFBE83E00E610CF /* Mutex.swift in Sources */,
 				055EF4AC1EFBE83E00E610CF /* LockingValue.swift in Sources */,
 				055EF4B11EFBE83E00E610CF /* UnfairLock.swift in Sources */,
 				055EF4AA1EFBE83E00E610CF /* Atomic.swift in Sources */,
-				0551EA6A1EFBFFC900D137B9 /* DispatchedValue.swift in Sources */,
 				0551EAFB1EFC25C300D137B9 /* DispatchedString.swift in Sources */,
 				0551EAFC1EFC25C300D137B9 /* DispatchedTreeController.swift in Sources */,
 				0551EAF91EFC25C300D137B9 /* DispatchedNumber.swift in Sources */,
