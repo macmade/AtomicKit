@@ -27,6 +27,8 @@ import Foundation
 /**
  * Swift wrapper class for `pthread_mutex_t`.  
  * Note that this is a non-recursive version.
+ * 
+ * - seealso: Locakble
  */
 public class Mutex: Lockable
 {

@@ -27,6 +27,8 @@ import Foundation
 /**
  * Swift wrapper class for `os_unfair_lock_t`.  
  * A low-level lock that allows waiters to block efficiently on contention.
+ * 
+ * - seealso: Locakble
  */
 public class UnfairLock: Lockable
 {

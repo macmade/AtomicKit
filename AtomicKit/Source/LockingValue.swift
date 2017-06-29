@@ -31,6 +31,7 @@ import Foundation
  * If you need this, please use subclasses of `DispatchedValue`.
  * 
  * - seealso: `DispatchedValue`
+ * - seealso: `ThreadSafeValueWrapper`
  */
 public class LockingValue< T, L >: ThreadSafeValueWrapper where L: NSLocking
 {

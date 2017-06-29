@@ -24,15 +24,37 @@
 
 import Foundation
 
+/**
+ * Thread-safe value wrapper, using dispatch queues to achieve synchronization.  
+ * Note that this class is not KVO-compliant.  
+ * If you need this, please use subclasses of `DispatchedValue`.
+ * 
+ * - seealso: DispatchedValueWrapper
+ */
 public class DispatchedValue< T >: DispatchedValueWrapper
 {
+    /**
+     * The wrapped value type.
+     */
     public typealias ValueType = T
     
+    /**
+     * Initializes a dispatched value object.  
+     * This initializer will use the main queue for synchronization.
+     * 
+     * - parameter value:   The initial value.
+     */
     public required convenience init( value: T )
     {
         self.init( value: value, queue: DispatchQueue.main )
     }
     
+    /**
+     * Initializes a dispatched value object.  
+     * 
+     * - parameter value:   The initial value.
+     * - parameter queue:   The queue to use to achieve synchronization.
+     */
     public required init( value: T, queue: DispatchQueue )
     {
         self._queue = queue
@@ -41,6 +63,12 @@ public class DispatchedValue< T >: DispatchedValueWrapper
         self._queue.setSpecific( key: self._key, value: self._uuid )
     }
     
+    /**
+     * Atomically gets the wrapped value.  
+     * The getter will be executed on the queue specified in the initialzer.
+     * 
+     * - returns:   The actual value.
+     */
     public func get() -> T
     {
         if( DispatchQueue.getSpecific( key: self._key ) == self._uuid )
@@ -53,6 +81,12 @@ public class DispatchedValue< T >: DispatchedValueWrapper
         }
     }
     
+    /**
+     * Atomically sets the wrapped value.  
+     * The setter will be executed on the queue specified in the initialzer.
+     * 
+     * -parameter value: The value to set.
+     */
     public func set( _ value: T )
     {
         if( DispatchQueue.getSpecific( key: self._key ) == self._uuid )
@@ -65,6 +99,14 @@ public class DispatchedValue< T >: DispatchedValueWrapper
         }
     }
     
+    /**
+     * Atomically executes a closure on the wrapped value.  
+     * The closure will be passed the actual value of the wrapped value,
+     * and is guaranteed to be executed atomically, on the queue specified in
+     * the initialzer.
+     * 
+     * -parameter closure: The close to execute.
+     */
     public func execute( closure: ( T ) -> Swift.Void )
     {
         if( DispatchQueue.getSpecific( key: self._key ) == self._uuid )
@@ -77,6 +119,14 @@ public class DispatchedValue< T >: DispatchedValueWrapper
         }
     }
     
+    /**
+     * Atomically executes a closure on the wrapped value, returning some value.  
+     * The closure will be passed the actual value of the wrapped value,
+     * and is guaranteed to be executed atomically, on the queue specified in
+     * the initialzer.
+     * 
+     * -parameter closure: The close to execute, returning some value.
+     */
     public func execute< R >( closure: ( T ) -> R ) -> R
     {
         if( DispatchQueue.getSpecific( key: self._key ) == self._uuid )
