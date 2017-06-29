@@ -38,6 +38,13 @@ class LockingValueTestHelper< L, U, T: LockingValue< U, L > > where U: Equatable
         self._default = defaultValue
     }
     
+    init( defaultValue: T.ValueType, testCase: XCTestCase )
+    {
+        self._values  = [ T( value: defaultValue ) ]
+        self._test    = testCase
+        self._default = defaultValue
+    }
+    
     func testGetSet_MainQueue( value: T.ValueType, notValue: T.ValueType )
     {
         self.testGetSet( value: value, notValue: notValue, queue: DispatchQueue.main )

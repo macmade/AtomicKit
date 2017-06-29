@@ -69,6 +69,7 @@ class LockingValueTest: XCTestCase
         self._helper3!.testGetSet_GlobalQueue( value: 42, notValue: 43 )
         self._helper4!.testGetSet_GlobalQueue( value: 42, notValue: 43 )
     }
+    
     func testExecute_NoReturn_MainQueue()
     {
         self._helper1!.testExecute_NoReturn_MainQueue( value: 42, notValue: 43 )

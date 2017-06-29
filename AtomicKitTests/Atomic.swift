@@ -27,13 +27,73 @@ import AtomicKit
 
 class AtomicTest: XCTestCase
 {
+    var _helper1: LockingValueTestHelper< UnfairLock, Bool,     Atomic< Bool > >?
+    var _helper2: LockingValueTestHelper< UnfairLock, Int,      Atomic< Int > >?
+    var _helper3: LockingValueTestHelper< UnfairLock, String,   Atomic< String > >?
+    var _helper4: LockingValueTestHelper< UnfairLock, NSNumber, Atomic< NSNumber > >?
+    
     override func setUp()
     {
         super.setUp()
+        
+        self._helper1 = LockingValueTestHelper( defaultValue: false, testCase: self )
+        self._helper2 = LockingValueTestHelper( defaultValue: 0,     testCase: self )
+        self._helper3 = LockingValueTestHelper( defaultValue: "",    testCase: self )
+        self._helper4 = LockingValueTestHelper( defaultValue: 0,     testCase: self )
     }
     
     override func tearDown()
     {
         super.tearDown()
     }
+    
+    func testGetSet_MainQueue()
+    {
+        self._helper1!.testGetSet_MainQueue( value: true,           notValue: false )
+        self._helper2!.testGetSet_MainQueue( value: 42,             notValue: 43 )
+        self._helper3!.testGetSet_MainQueue( value: "hello, world", notValue: "hello, universe" )
+        self._helper4!.testGetSet_MainQueue( value: 42,             notValue: 43 )
+    }
+    
+    func testGetSet_GlobalQueue()
+    {
+        self._helper1!.testGetSet_GlobalQueue( value: true,           notValue: false )
+        self._helper2!.testGetSet_GlobalQueue( value: 42,             notValue: 43 )
+        self._helper3!.testGetSet_GlobalQueue( value: "hello, world", notValue: "hello, universe" )
+        self._helper4!.testGetSet_GlobalQueue( value: 42,             notValue: 43 )
+    }
+    
+    func testExecute_NoReturn_MainQueue()
+    {
+        self._helper1!.testExecute_NoReturn_MainQueue( value: true,           notValue: false )
+        self._helper2!.testExecute_NoReturn_MainQueue( value: 42,             notValue: 43 )
+        self._helper3!.testExecute_NoReturn_MainQueue( value: "hello, world", notValue: "hello, universe" )
+        self._helper4!.testExecute_NoReturn_MainQueue( value: 42,             notValue: 43 )
+    }
+    
+    func testExecute_NoReturn_GlobalQueue()
+    {
+        self._helper1!.testExecute_NoReturn_GlobalQueue( value: true,           notValue: false )
+        self._helper2!.testExecute_NoReturn_GlobalQueue( value: 42,             notValue: 43 )
+        self._helper3!.testExecute_NoReturn_GlobalQueue( value: "hello, world", notValue: "hello, universe" )
+        self._helper4!.testExecute_NoReturn_GlobalQueue( value: 42,             notValue: 43 )
+    }
+    
+    func testExecute_Return_MainQueue()
+    {
+        self._helper1!.testExecute_Return_MainQueue( value: true,           notValue: false )
+        self._helper2!.testExecute_Return_MainQueue( value: 42,             notValue: 43 )
+        self._helper3!.testExecute_Return_MainQueue( value: "hello, world", notValue: "hello, universe" )
+        self._helper4!.testExecute_Return_MainQueue( value: 42,             notValue: 43 )
+    }
+    
+    func testExecute_Return_GlobalQueue()
+    {
+        self._helper1!.testExecute_Return_GlobalQueue( value: true,           notValue: false )
+        self._helper2!.testExecute_Return_GlobalQueue( value: 42,             notValue: 43 )
+        self._helper3!.testExecute_Return_GlobalQueue( value: "hello, world", notValue: "hello, universe" )
+        self._helper4!.testExecute_Return_GlobalQueue( value: 42,             notValue: 43 )
+    }
 }
+
+
