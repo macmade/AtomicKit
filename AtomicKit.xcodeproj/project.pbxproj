@@ -55,6 +55,7 @@
 		056763731EFD757C005118F7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056763721EFD757C005118F7 /* main.swift */; };
 		0567637A1EFD7597005118F7 /* Test-Helper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 056763701EFD757C005118F7 /* Test-Helper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0567637D1EFD780C005118F7 /* AtomicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 055EF4671EFBE78100E610CF /* AtomicKit.framework */; };
+		05C023111F057755006D4851 /* LockingValueTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C0230F1F057677006D4851 /* LockingValueTestHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +171,7 @@
 		056763721EFD757C005118F7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		05B3A04E1F004DFE00524F81 /* jazzy.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = jazzy.yml; sourceTree = "<group>"; };
 		05B3A04F1F004DFE00524F81 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		05C0230F1F057677006D4851 /* LockingValueTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockingValueTestHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 				051607981F042A6700E732FC /* DispatchedValueTestHelper.swift */,
 				055EF4771EFBE78100E610CF /* Info.plist */,
 				055EF4A41EFBE83B00E610CF /* LockingValue.swift */,
+				05C0230F1F057677006D4851 /* LockingValueTestHelper.swift */,
 				055EF4A81EFBE83B00E610CF /* Mutex.swift */,
 				055EF4A51EFBE83B00E610CF /* RecursiveMutex.swift */,
 				055EF4A21EFBE83B00E610CF /* RWLock.swift */,
@@ -520,6 +523,7 @@
 				055EF4AA1EFBE83E00E610CF /* Atomic.swift in Sources */,
 				0551EAFB1EFC25C300D137B9 /* DispatchedString.swift in Sources */,
 				0551EAFC1EFC25C300D137B9 /* DispatchedTreeController.swift in Sources */,
+				05C023111F057755006D4851 /* LockingValueTestHelper.swift in Sources */,
 				0516079F1F046AF600E732FC /* DispatchedDictionaryController.swift in Sources */,
 				0551EAF91EFC25C300D137B9 /* DispatchedNumber.swift in Sources */,
 				0551EAF81EFC25C300D137B9 /* DispatchedMutableSet.swift in Sources */,
