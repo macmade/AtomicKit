@@ -24,26 +24,35 @@
 
 import Foundation
 
-public class LockingValue< T, L >: ThreadSafeValueWrapper where L: Lockable
+public class LockingValue< T, L >: ThreadSafeValueWrapper where L: NSLocking
 {
     public typealias ValueType = T
     
-    public required init( value: ValueType )
+    public required init( value: ValueType, lock: NSLocking )
     {
         self._value = value
-        
+        self._lock  = lock
+    }
+    
+    public required convenience init( value: ValueType )
+    {
         do
         {
-            try self._lock = L()
+            if let t = L.self as? Lockable.Type
+            {
+                try self.init( value: value, lock: t.init() )
+                
+                return
+            }
         }
         catch
-        {
-            #if DEBUG
-            print( "Initialization of " + String( describing: L.self ) + " failed! Falling back to NSRecursiveLock." )    
-            #endif
-            
-            self._lock = NSRecursiveLock()
-        }
+        {}
+        
+        #if DEBUG
+        print( "Initialization of " + String( describing: L.self ) + " failed! Falling back to NSRecursiveLock." )
+        #endif
+        
+        self.init( value: value, lock: NSRecursiveLock() )
     }
     
     public func get() -> ValueType
