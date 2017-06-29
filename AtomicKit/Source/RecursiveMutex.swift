@@ -24,14 +24,36 @@
 
 import Foundation
 
+/**
+ * Swift wrapper class for `pthread_mutex_t`.  
+ * Note that this is a recursive version.
+ */
 public class RecursiveMutex: Lockable
 {
+    /**
+     * `RecursiveMutex` errors.
+     */
     public enum Error: Swift.Error
     {
+        /**
+         * Thrown when a failure occurs trying to initialize the native
+         * mutex type.
+         */
         case CannotCreateMutex
+        
+        /**
+         * Thrown when a failure occurs trying to initialize the native
+         * mutex attributes type.
+         */
         case CannotCreateMutexAttributes
     }
     
+    
+    /**
+     * Initializes a recursive mutex object.
+     * 
+     * - throws: `RecursiveMutex.Error` on failure.
+     */
     public required init() throws
     {
         var attr = pthread_mutexattr_t()
@@ -59,16 +81,27 @@ public class RecursiveMutex: Lockable
         pthread_mutex_destroy( &( self._mutex ) )
     }
     
+    /**
+     * Locks the recursive mutex.
+     */
     public func lock()
     {
         pthread_mutex_lock( &( self._mutex ) )
     }
     
+    /**
+     * Unlocks the recursive mutex.
+     */
     public func unlock()
     {
         pthread_mutex_unlock( &( self._mutex ) )
     }
     
+    /**
+     * Tries to lock the recursive mutex.
+     * 
+     * - returns:   `true` if the recursive mutex was successfully locked, otherwise `false`.
+     */
     public func tryLock() -> Bool
     {
         return pthread_mutex_trylock( &( self._mutex ) ) == 0

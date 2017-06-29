@@ -24,16 +24,38 @@
 
 import Foundation
 
+/**
+ * Represents a thread-safe value wrapper, using locking to achieve
+ * synchronization.  
+ * Note that this class is not KVO-compliant.  
+ * If you need this, please use subclasses of `DispatchedValue`.
+ * 
+ * - seealso: `DispatchedValue`
+ */
 public class LockingValue< T, L >: ThreadSafeValueWrapper where L: NSLocking
 {
+    /**
+     * The wrapped value type.
+     */
     public typealias ValueType = T
     
+    /**
+     * Initializes a locking value object.
+     * 
+     * - parameter value:   The initial value.
+     * - parameter lock:    The lock to use to achieve synchronization. Must conform to `NSLocking`.
+     */
     public required init( value: ValueType, lock: NSLocking )
     {
         self._value = value
         self._lock  = lock
     }
     
+    /**
+     * Initializes a locking value object.
+     * 
+     * - parameter value:   The initial value.
+     */
     public required convenience init( value: ValueType )
     {
         do
@@ -55,6 +77,11 @@ public class LockingValue< T, L >: ThreadSafeValueWrapper where L: NSLocking
         self.init( value: value, lock: NSRecursiveLock() )
     }
     
+    /**
+     * Atomically gets the wrapped value.
+     * 
+     * - returns:   The actual value.
+     */
     public func get() -> ValueType
     {
         self._lock.lock()
@@ -66,6 +93,11 @@ public class LockingValue< T, L >: ThreadSafeValueWrapper where L: NSLocking
         return value
     }
     
+    /**
+     * Atomically sets the wrapped value.
+     * 
+     * -parameter value: The value to set.
+     */
     public func set( _ value: ValueType )
     {
         self._lock.lock()
@@ -75,6 +107,13 @@ public class LockingValue< T, L >: ThreadSafeValueWrapper where L: NSLocking
         self._lock.unlock()
     }
     
+    /**
+     * Atomically executes a closure on the wrapped value.  
+     * The closure will be passed the actual value of the wrapped value,
+     * and is guaranteed to be executed atomically.
+     * 
+     * -parameter closure: The close to execute.
+     */
     public func execute( closure: ( ValueType ) -> Swift.Void )
     {
         self._lock.lock()
@@ -84,6 +123,13 @@ public class LockingValue< T, L >: ThreadSafeValueWrapper where L: NSLocking
         self._lock.unlock()
     }
     
+    /**
+     * Atomically executes a closure on the wrapped value, returning some value.  
+     * The closure will be passed the actual value of the wrapped value,
+     * and is guaranteed to be executed atomically.
+     * 
+     * -parameter closure: The close to execute, returning some value.
+     */
     public func execute< R >( closure: ( ValueType ) -> R ) -> R
     {
         self._lock.lock()

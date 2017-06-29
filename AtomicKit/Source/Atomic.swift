@@ -24,5 +24,15 @@
 
 import Foundation
 
+/**
+ * Represents a thread-safe value wrapper, using an unfair lock to achieve
+ * synchronization.  
+ * Note that this class is not KVO-compliant.  
+ * If you need this, please use subclasses of `DispatchedValue`.
+ * 
+ * - seealso: `DispatchedValue`
+ * - seealso: `LockingValue`
+ * - seealso: `UnfairLock`
+ */
 public class Atomic< T >: LockingValue< T, UnfairLock >
 {}

@@ -24,14 +24,35 @@
 
 import Foundation
 
+/**
+ * Swift wrapper class for `pthread_mutex_t`.  
+ * Note that this is a non-recursive version.
+ */
 public class Mutex: Lockable
 {
+    /**
+     * `Mutex` errors.
+     */
     public enum Error: Swift.Error
     {
+        /**
+         * Thrown when a failure occurs trying to initialize the native
+         * mutex type.
+         */
         case CannotCreateMutex
+        
+        /**
+         * Thrown when a failure occurs trying to initialize the native
+         * mutex attributes type.
+         */
         case CannotCreateMutexAttributes
     }
     
+    /**
+     * Initializes a mutex object.
+     * 
+     * - throws: `Mutex.Error` on failure.
+     */
     public required init() throws
     {
         var attr = pthread_mutexattr_t()
@@ -57,16 +78,27 @@ public class Mutex: Lockable
         pthread_mutex_destroy( &( self._mutex ) )
     }
     
+    /**
+     * Locks the mutex.
+     */
     public func lock()
     {
         pthread_mutex_lock( &( self._mutex ) )
     }
     
+    /**
+     * Unlocks the mutex.
+     */
     public func unlock()
     {
         pthread_mutex_unlock( &( self._mutex ) )
     }
     
+    /**
+     * Tries to lock the mutex.
+     * 
+     * - returns:   `true` if the mutex was successfully locked, otherwise `false`.
+     */
     public func tryLock() -> Bool
     {
         return pthread_mutex_trylock( &( self._mutex ) ) == 0

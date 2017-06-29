@@ -24,8 +24,19 @@
 
 import Foundation
 
+/**
+ * Protocol for `AtomicKit` dispatched value wrappers.  
+ * 
+ * - seealso: `ThreadSafeValueWrapper`
+ */
 public protocol DispatchedValueWrapper: ThreadSafeValueWrapper
 {
+    /**
+     * Initializes a dispatched value wrapper object.
+     * 
+     * - parameter value: The initial value to set.
+     * - parameter queue: The dispatch queue used to achieve synchronization.
+     */
     init( value: ValueType, queue: DispatchQueue )
 }
 
