@@ -24,20 +24,47 @@
 
 import Cocoa
 
+/**
+ * Thread-safe value wrapper for `NSArrayController`, using dispatch queues to
+ * achieve synchronization.
+ * This class is KVO-compliant. You may observe its `value` property to be
+ * notified of changes. This is applicable to Cocoa bindings.
+ * 
+ * - seealso: DispatchedValueWrapper
+ */
 @objc public class DispatchedArrayController: NSObject, DispatchedValueWrapper
 {
+    /**
+     * The wrapped value type, `NSArrayController`.
+     */
     public typealias ValueType = NSArrayController?
     
+    /**
+     * Initializes a dispatched value object.  
+     * This initializer will use the main queue for synchronization.
+     * 
+     * - parameter value:   The initial      value.
+     */
     public required convenience init( value: ValueType )
     {
         self.init( value: value, queue: DispatchQueue.main )
     }
     
+    /**
+     * Initializes a dispatched value object.  
+     * 
+     * - parameter value:   The initial `NSArrayController` value.
+     * - parameter queue:   The queue to use to achieve synchronization.
+     */
     public required init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
     {
         self._value = DispatchedValue< ValueType >( value: value, queue: queue )
     }
     
+    /**
+     * The wrapped `NSArrayController` value.  
+     * This property is KVO-compliant.
+     */
     @objc public dynamic var value: ValueType
     {
         get
@@ -53,21 +80,50 @@ import Cocoa
         }
     }
     
+    /**
+     * Atomically gets the wrapped `NSArrayController` value.  
+     * The getter will be executed on the queue specified in the initialzer.
+     * 
+     * - returns:   The actual `NSArrayController` value.
+     */
     public func get() -> ValueType
     {
         return self.value
     }
     
+    /**
+     * Atomically sets the wrapped `NSArrayController` value.  
+     * The setter will be executed on the queue specified in the initialzer.
+     * 
+     * -parameter value: The `NSArrayController` value to set.
+     */
     public func set( _ value: ValueType )
     {
         self.value = value
     }
     
+    /**
+     * Atomically executes a closure on the wrapped `NSArrayController` value.  
+     * The closure will be passed the actual value of the wrapped
+     * `NSArrayController` value, and is guaranteed to be executed atomically,
+     * on the queue specified in the initialzer.
+     * 
+     * -parameter closure: The close to execute.
+     */
     public func execute( closure: ( ValueType ) -> Swift.Void )
     {
         self._value.execute( closure: closure )
     }
     
+    /**
+     * Atomically executes a closure on the wrapped `NSArrayController` value,
+     * returning some value.
+     * The closure will be passed the actual value of the wrapped
+     * `NSArrayController` value, and is guaranteed to be executed atomically,
+     * on the queue specified in the initialzer.
+     * 
+     * -parameter closure: The close to execute, returning some value.
+     */
     public func execute< R >( closure: ( ValueType ) -> R ) -> R
     {
         return self._value.execute( closure: closure )

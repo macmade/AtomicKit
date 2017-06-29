@@ -24,20 +24,47 @@
 
 import Cocoa
 
+/**
+ * Thread-safe value wrapper for `NSTreeController`, using dispatch queues to
+ * achieve synchronization.
+ * This class is KVO-compliant. You may observe its `value` property to be
+ * notified of changes. This is applicable to Cocoa bindings.
+ * 
+ * - seealso: DispatchedValueWrapper
+ */
 @objc public class DispatchedTreeController: NSObject, DispatchedValueWrapper
 {
+    /**
+     * The wrapped value type, `NSTreeController`.
+     */
     public typealias ValueType = NSTreeController?
     
+    /**
+     * Initializes a dispatched value object.  
+     * This initializer will use the main queue for synchronization.
+     * 
+     * - parameter value:   The initial      value.
+     */
     public required convenience init( value: ValueType )
     {
         self.init( value: value, queue: DispatchQueue.main )
     }
     
+    /**
+     * Initializes a dispatched value object.  
+     * 
+     * - parameter value:   The initial `NSTreeController` value.
+     * - parameter queue:   The queue to use to achieve synchronization.
+     */
     public required init( value: ValueType = nil, queue: DispatchQueue = DispatchQueue.main )
     {
         self._value = DispatchedValue< ValueType >( value: value, queue: queue )
     }
     
+    /**
+     * The wrapped `NSTreeController` value.  
+     * This property is KVO-compliant.
+     */
     @objc public dynamic var value: ValueType
     {
         get
@@ -53,21 +80,50 @@ import Cocoa
         }
     }
     
+    /**
+     * Atomically gets the wrapped `NSTreeController` value.  
+     * The getter will be executed on the queue specified in the initialzer.
+     * 
+     * - returns:   The actual `NSTreeController` value.
+     */
     public func get() -> ValueType
     {
         return self.value
     }
     
+    /**
+     * Atomically sets the wrapped `NSTreeController` value.  
+     * The setter will be executed on the queue specified in the initialzer.
+     * 
+     * -parameter value: The `NSTreeController` value to set.
+     */
     public func set( _ value: ValueType )
     {
         self.value = value
     }
     
+    /**
+     * Atomically executes a closure on the wrapped `NSTreeController` value.  
+     * The closure will be passed the actual value of the wrapped
+     * `NSTreeController` value, and is guaranteed to be executed atomically,
+     * on the queue specified in the initialzer.
+     * 
+     * -parameter closure: The close to execute.
+     */
     public func execute( closure: ( ValueType ) -> Swift.Void )
     {
         self._value.execute( closure: closure )
     }
     
+    /**
+     * Atomically executes a closure on the wrapped `NSTreeController` value,
+     * returning some value.
+     * The closure will be passed the actual value of the wrapped
+     * `NSTreeController` value, and is guaranteed to be executed atomically,
+     * on the queue specified in the initialzer.
+     * 
+     * -parameter closure: The close to execute, returning some value.
+     */
     public func execute< R >( closure: ( ValueType ) -> R ) -> R
     {
         return self._value.execute( closure: closure )
