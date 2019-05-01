@@ -32,7 +32,7 @@ import Foundation
  * 
  * - seealso: `DispatchedValue`
  * - seealso: `LockingValue`
- * - seealso: `UnfairLock`
+ * - seealso: `PossiblyUnfairLock`
  */
-public class Atomic< T >: LockingValue< T, UnfairLock >
+public class Atomic< T >: LockingValue< T, PossiblyUnfairLock >
 {}

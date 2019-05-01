@@ -27,10 +27,10 @@ import AtomicKit
 
 class AtomicTest: XCTestCase
 {
-    var _helper1: LockingValueTestHelper< UnfairLock, Bool,     Atomic< Bool > >?
-    var _helper2: LockingValueTestHelper< UnfairLock, Int,      Atomic< Int > >?
-    var _helper3: LockingValueTestHelper< UnfairLock, String,   Atomic< String > >?
-    var _helper4: LockingValueTestHelper< UnfairLock, NSNumber, Atomic< NSNumber > >?
+    var _helper1: LockingValueTestHelper< PossiblyUnfairLock, Bool,     Atomic< Bool > >?
+    var _helper2: LockingValueTestHelper< PossiblyUnfairLock, Int,      Atomic< Int > >?
+    var _helper3: LockingValueTestHelper< PossiblyUnfairLock, String,   Atomic< String > >?
+    var _helper4: LockingValueTestHelper< PossiblyUnfairLock, NSNumber, Atomic< NSNumber > >?
     
     override func setUp()
     {

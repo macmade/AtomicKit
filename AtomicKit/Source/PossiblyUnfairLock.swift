@@ -25,28 +25,37 @@
 import Foundation
 
 /**
- * Swift wrapper class for `os_unfair_lock_t`.  
- * A low-level lock that allows waiters to block efficiently on contention.
+ * A potentially unfair lock.
+ * If available (macOS 10.12 and later), uses internally an unfair lock.
+ * Otherwise, uses a standard mutex.
  * 
+ * - seealso: UnfairLock
+ * - seealso: Mutex
  * - seealso: Locakble
  */
-@available( macOS 10.12, * ) public class UnfairLock: Lockable
+public class PossiblyUnfairLock: Lockable
 {
     /**
      * Designated initializer.
      * Initializes an unfair lock object.
      */
-    public required init()
+    public required init() throws
     {
-        self._lock = os_unfair_lock_t.allocate( capacity: 1 )
-        
-        self._lock.initialize( to: os_unfair_lock_s() )
-    }
-    
-    deinit
-    {
-        self._lock.deinitialize( count: 1 )
-        self._lock.deallocate()
+        if #available( macOS 10.12, * )
+        {
+            self._lock = UnfairLock()
+        }
+        else
+        {
+            do
+            {
+                try self._lock = Mutex()
+            }
+            catch let e
+            {
+                throw e
+            }
+        }
     }
     
     /**
@@ -54,7 +63,14 @@ import Foundation
      */
     public func lock()
     {
-        os_unfair_lock_lock( self._lock )
+        if #available( macOS 10.12, * )
+        {
+            ( self._lock as! UnfairLock ).lock()
+        }
+        else
+        {
+            ( self._lock as! Mutex ).lock()
+        }
     }
     
     /**
@@ -62,7 +78,14 @@ import Foundation
      */
     public func unlock()
     {
-        os_unfair_lock_unlock( self._lock )
+        if #available( macOS 10.12, * )
+        {
+            ( self._lock as! UnfairLock ).unlock()
+        }
+        else
+        {
+            ( self._lock as! Mutex ).unlock()
+        }
     }
     
     /**
@@ -72,8 +95,15 @@ import Foundation
      */
     public func tryLock() -> Bool
     {
-        return os_unfair_lock_trylock( self._lock )
+        if #available( macOS 10.12, * )
+        {
+            return ( self._lock as! UnfairLock ).tryLock()
+        }
+        else
+        {
+            return ( self._lock as! Mutex ).tryLock()
+        }
     }
     
-    private var _lock: os_unfair_lock_t
+    private var _lock: Any
 }

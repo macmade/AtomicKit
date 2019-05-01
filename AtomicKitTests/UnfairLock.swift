@@ -26,7 +26,7 @@ import XCTest
 import AtomicKit
 import STDThreadKit
 
-class UnfairLockTest: XCTestCase
+@available( macOS 10.12, * ) class UnfairLockTest: XCTestCase
 {
     override func setUp()
     {

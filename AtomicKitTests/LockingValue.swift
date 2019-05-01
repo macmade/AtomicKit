@@ -27,10 +27,10 @@ import AtomicKit
 
 class LockingValueTest: XCTestCase
 {
-    var _helper1: LockingValueTestHelper< UnfairLock,     Int, LockingValue< Int, UnfairLock > >?
-    var _helper2: LockingValueTestHelper< Mutex,          Int, LockingValue< Int, Mutex > >?
-    var _helper3: LockingValueTestHelper< RecursiveMutex, Int, LockingValue< Int, RecursiveMutex > >?
-    var _helper4: LockingValueTestHelper< NSLock,         Int, LockingValue< Int, NSLock > >?
+    var _helper1: LockingValueTestHelper< PossiblyUnfairLock, Int, LockingValue< Int, PossiblyUnfairLock > >?
+    var _helper2: LockingValueTestHelper< Mutex,              Int, LockingValue< Int, Mutex > >?
+    var _helper3: LockingValueTestHelper< RecursiveMutex,     Int, LockingValue< Int, RecursiveMutex > >?
+    var _helper4: LockingValueTestHelper< NSLock,             Int, LockingValue< Int, NSLock > >?
     
     override func setUp()
     {
@@ -38,7 +38,7 @@ class LockingValueTest: XCTestCase
         
         do
         {
-                self._helper1 = LockingValueTestHelper( defaultValue: 0, testCase: self, lock: UnfairLock() )
+            try self._helper1 = LockingValueTestHelper( defaultValue: 0, testCase: self, lock: PossiblyUnfairLock() )
             try self._helper2 = LockingValueTestHelper( defaultValue: 0, testCase: self, lock: Mutex() )
             try self._helper3 = LockingValueTestHelper( defaultValue: 0, testCase: self, lock: RecursiveMutex() )
                 self._helper4 = LockingValueTestHelper( defaultValue: 0, testCase: self, lock: NSLock() )

@@ -35,6 +35,7 @@
 		0551EAFC1EFC25C300D137B9 /* DispatchedTreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0551EAF21EFC24C500D137B9 /* DispatchedTreeController.swift */; };
 		0551EB141EFD397C00D137B9 /* AtomicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0551EB131EFD397C00D137B9 /* AtomicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0551EB151EFD39F300D137B9 /* sem_t.h in Headers */ = {isa = PBXBuildFile; fileRef = 055EF4961EFBE7EA00E610CF /* sem_t.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0554F988227A082000A6D652 /* PossiblyUnfairLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0554F987227A082000A6D652 /* PossiblyUnfairLock.swift */; };
 		055EF4711EFBE78100E610CF /* AtomicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 055EF4671EFBE78100E610CF /* AtomicKit.framework */; };
 		055EF4981EFBE7F800E610CF /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF4971EFBE7EA00E610CF /* Atomic.swift */; };
 		055EF4991EFBE7F800E610CF /* Lockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055EF48E1EFBE7EA00E610CF /* Lockable.swift */; };
@@ -187,6 +188,7 @@
 		0554F980227A052700A6D652 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0554F982227A052700A6D652 /* ccache-config.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "ccache-config.sh"; sourceTree = "<group>"; };
 		0554F983227A052700A6D652 /* ccache.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ccache.sh; sourceTree = "<group>"; };
+		0554F987227A082000A6D652 /* PossiblyUnfairLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PossiblyUnfairLock.swift; sourceTree = "<group>"; };
 		055EF4671EFBE78100E610CF /* AtomicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AtomicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		055EF46B1EFBE78100E610CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		055EF4701EFBE78100E610CF /* AtomicKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtomicKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -454,6 +456,7 @@
 				055EF4941EFBE7EA00E610CF /* Semaphore.swift */,
 				0551EADF1EFC1A8B00D137B9 /* ThreadSafeValueWrapper.swift */,
 				055EF48F1EFBE7EA00E610CF /* UnfairLock.swift */,
+				0554F987227A082000A6D652 /* PossiblyUnfairLock.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 055EF45D1EFBE78100E610CF;
 			productRefGroup = 055EF4681EFBE78100E610CF /* Products */;
@@ -643,6 +647,7 @@
 				0551EAE01EFC1A8B00D137B9 /* ThreadSafeValueWrapper.swift in Sources */,
 				0551EAEA1EFC1EED00D137B9 /* DispatchedMutableSet.swift in Sources */,
 				055EF49C1EFBE7F800E610CF /* RecursiveMutex.swift in Sources */,
+				0554F988227A082000A6D652 /* PossiblyUnfairLock.swift in Sources */,
 				0551EACA1EFC14AA00D137B9 /* DispatchedNumber.swift in Sources */,
 				0551EAE41EFC1EA600D137B9 /* DispatchedTreeController.swift in Sources */,
 				0551EAE61EFC1ECE00D137B9 /* DispatchedMutableArray.swift in Sources */,
@@ -727,7 +732,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0554F956227A052700A6D652 /* Debug.xcconfig */;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 			};
 			name = Debug;
 		};
@@ -735,7 +740,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0554F957227A052700A6D652 /* Release.xcconfig */;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 			};
 			name = Release;
 		};
@@ -776,6 +781,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = AtomicKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.AtomicKitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -786,6 +792,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = AtomicKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.AtomicKitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
