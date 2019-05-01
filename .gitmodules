@@ -1,3 +1,6 @@
 [submodule "Submodules/STDThreadKit"]
 	path = Submodules/STDThreadKit
 	url = https://github.com/macmade/STDThreadKit.git
+[submodule "Submodules/xcconfig"]
+	path = Submodules/xcconfig
+	url = https://github.com/macmade/xcconfig.git
