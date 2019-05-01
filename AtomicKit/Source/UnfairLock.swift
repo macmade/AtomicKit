@@ -45,8 +45,8 @@ public class UnfairLock: Lockable
     
     deinit
     {
-        self._lock.deinitialize()
-        self._lock.deallocate( capacity: 1 )
+        self._lock.deinitialize( count: 1 )
+        self._lock.deallocate()
     }
     
     /**
